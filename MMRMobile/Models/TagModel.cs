@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
@@ -14,4 +15,6 @@ public class TagModel : BaseModel
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "请设置标签状态")] public bool Active { get; set; } = true;
+
+    public virtual ICollection<ContactTagModel> ContactTags { get; set; } = new List<ContactTagModel>();
 }

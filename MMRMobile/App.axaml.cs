@@ -35,6 +35,7 @@ public partial class App : Application
         _services?.AddSingleton<MainViewModel>();
         _services?.AddSingleton<DockViewModel>();
         _services?.AddTransient<TagViewModel>();
+        _services?.AddTransient<ContactViewModel>();
     }
 
     public override void OnFrameworkInitializationCompleted()
