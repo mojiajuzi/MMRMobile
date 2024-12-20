@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MMRMobile.Components.Dock"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MMRMobile.Components.Dock.DockView"
+             x:DataType="vm:DockViewModel">
+    <StackPanel Classes="DockContainer">
+        <Button Classes="DockBtn" Command="{Binding ChangeViewCommand}" CommandParameter="Home">
+            <StackPanel Classes="DockItem" Name="Home">
+                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf015;"></TextBlock>
+                <TextBlock Text="首页"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Classes="DockBtn" Command="{Binding ChangeViewCommand}" CommandParameter="Work">
+            <StackPanel Classes="DockItem" Name="Work">
+                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf03a;"></TextBlock>
+                <TextBlock Text="项目"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Classes="DockBtn" Command="{Binding ChangeViewCommand}" CommandParameter="Contact">
+            <StackPanel Classes="DockItem" Name="Contact">
+                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf2b9;"></TextBlock>
+                <TextBlock Text="联系人"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Classes="DockBtn" Command="{Binding ChangeViewCommand}" CommandParameter="Tag">
+            <StackPanel Classes="DockItem" Name="Tag">
+                <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf02b;"></TextBlock>
+                <TextBlock Text="分类"></TextBlock>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

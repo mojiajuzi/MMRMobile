@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="MMRMobile/App.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Assets/Styles.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Assets/styles/Styles.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Components/Dock/Dock.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Components/Dock/DockView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Views/MainView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Views/MainWindow.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Views/TagView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

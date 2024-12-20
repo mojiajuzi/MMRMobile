@@ -1,0 +1,94 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:MMRMobile.ViewModels"
+             xmlns:model="clr-namespace:MMRMobile.Models"
+             x:DataType="vm:TagViewModel"
+             x:Class="MMRMobile.Views.TagView">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0">
+            <Grid ColumnDefinitions="80*,20*" VerticalAlignment="Center">
+                <Grid Column="0">
+                    <TextBox Classes="Search" Text="{Binding SearchText}"></TextBox>
+                </Grid>
+                <Grid Column="1">
+                    <Button Classes="Action" Command="{Binding OpenPopupCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#x2b;"></TextBlock>
+                            <TextBlock Text="新增"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Tags}" x:Name="Root">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate x:DataType="{x:Type model:TagModel}">
+                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" Margin="0,0,0,4">
+                            <Grid ColumnDefinitions="40*,30*,30*" VerticalAlignment="Center">
+                                <Grid Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}" TextAlignment="Start" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <ToggleSwitch IsChecked="{Binding Active}"
+                                                  Command="{Binding #Root.((vm:TagViewModel)DataContext).TagActiveCommand}"
+                                                  CommandParameter="{Binding .}">
+                                    </ToggleSwitch>
+                                </Grid>
+                                <Grid Grid.Column="2">
+                                    <Button Classes="Action Update"
+                                            Command="{Binding #Root.((vm:TagViewModel)DataContext).TagUpdateCommand}"
+                                            CommandParameter="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Classes="Icon" Text="&#xf044;"></TextBlock>
+                                            <TextBlock Classes="Action Update" Text="修改"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Popup Placement="Center"
+                   PlacementTarget="{Binding $parent[UserControl]}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   IsOpen="{Binding IsPopupOpen}">
+                <Border Classes="Popup">
+                    <StackPanel Classes="Popup">
+                        <TextBlock Classes="ShowError"
+                                   IsVisible="{Binding HasErrors}"
+                                   Text="{Binding ErrorMessage}" />
+                        <Label Content="名称"></Label>
+                        <TextBox
+                            Text="{Binding TagData.Name}" Padding="0,10,0,0" />
+                        <Label Content="激活"></Label>
+                        <ToggleSwitch Name="Status"
+                                      OnContent="是"
+                                      OffContent="否"
+                                      IsChecked="{Binding TagData.Active}" />
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Spacing="16">
+                            <Button Classes="Action"
+                                    Content="取消"
+                                    Command="{Binding PopupCloseCommand}" />
+                            <Button Classes="Action"
+                                    Content="提交"
+                                    Command="{Binding TagSubmitCommand}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+    </Grid>
+</UserControl>

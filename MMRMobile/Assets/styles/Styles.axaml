@@ -1,0 +1,92 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    <Style Selector="Border.DockBox">
+        <Setter Property="Margin" Value="40,20"></Setter>
+        <Setter Property="Padding" Value="10,8"></Setter>
+        <Setter Property="BoxShadow" Value="8 5 20 DarkGray"></Setter>
+        <Setter Property="CornerRadius" Value="20"></Setter>
+    </Style>
+    <Style Selector="StackPanel.DockContainer">
+        <Setter Property="Orientation" Value="Horizontal"></Setter>
+        <Setter Property="Spacing" Value="30"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style Selector="Button.DockBtn">
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    <Style Selector="StackPanel.DockItem">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Spacing" Value="5"></Setter>
+    </Style>
+    <Style Selector="StackPanel.DockItem > TextBlock">
+        <Setter Property="TextAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style Selector="TextBlock.Icon">
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"></Setter>
+    </Style>
+
+    <Style Selector="TextBox.Search">
+        <Setter Property="Margin" Value="8,8"></Setter>
+        <Setter Property="CornerRadius" Value="30"></Setter>
+    </Style>
+
+    <Style Selector="Button.Action">
+        <Setter Property="Margin" Value=" 5 5"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+
+    <Style Selector="Button.Cancel">
+        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+
+    <Style Selector="Button.Delete">
+        <Setter Property="Background" Value="{DynamicResource WarningBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+
+    <Style Selector="Button.Update">
+        <Setter Property="Background" Value="{DynamicResource SuccessBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+    </Style>
+
+    <Style Selector="Button.Info">
+        <Setter Property="Background" Value="{DynamicResource InfoBrush}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"></Setter>
+    </Style>
+
+    <Style Selector="Button.Default">
+        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"></Setter>
+    </Style>
+
+    <Style Selector="Border.Popup">
+        <Setter Property="Width" Value="300"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BoxShadow" Value="0 0 8 0 #66000000, 0 0 2 0 #33000000, 0 4 16 0 #1A000000" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Padding" Value="20, 5"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+    </Style>
+
+    <Style Selector="TextBlock.ShowError">
+        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    </Style>
+
+
+</Styles>
