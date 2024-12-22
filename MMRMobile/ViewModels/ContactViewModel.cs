@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -46,6 +47,22 @@ public partial class ContactViewModel : ViewModelBase
         }
     }
 
+    partial void OnSearchTextChanged(string? value)
+    {
+        if (!string.IsNullOrEmpty(value))
+        {
+            SearchText = value;
+            var contactList = _dbContext.Contacts.AsNoTracking().Include(t => t.ContactTags)
+                .ThenInclude(model => model.Tag)
+                .Where(c => c.Name.Contains(value)).ToList();
+            Contacts = new ObservableCollection<ContactModel>(contactList);
+        }
+        else
+        {
+            GetContacts();
+        }
+    }
+
     [RelayCommand]
     private void OpenPopup()
     {
@@ -63,39 +80,83 @@ public partial class ContactViewModel : ViewModelBase
             return;
         }
 
+        //验证电话号码的唯一性
+        var existContact =
+            _dbContext.Contacts.FirstOrDefault(c => c.Phone == ContactData.Phone && c.Id != ContactData.Id);
+        if (existContact != null)
+        {
+            HasErrors = true;
+            ErrorMessage = "电话号码已存在";
+            return;
+        }
+
         using var transaction = _dbContext.Database.BeginTransaction();
         try
         {
-            ContactData.DateCreated = DateTime.UtcNow;
-            ContactData.DateModified = DateTime.UtcNow;
-            _dbContext.Contacts.Add(ContactData);
-            _dbContext.SaveChanges();
-
             var selectedTags = Ftvm.GetSelectedTags();
-            if (selectedTags.Count != 0)
+            if (ContactData.Id > 0)
             {
-                var contactTags = selectedTags.Select(t => new ContactTagModel
+                var contact = _dbContext.Contacts
+                    .Include(c => c.ContactTags)
+                    .FirstOrDefault(c => c.Id == ContactData.Id);
+
+                if (contact != null)
                 {
-                    ContactId = ContactData.Id,
-                    TagId = t.Id,
-                    CreateTime = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                });
-                _dbContext.ContactTags.AddRange(contactTags);
+                    contact.Name = ContactData.Name;
+                    contact.Phone = ContactData.Phone;
+                    contact.Email = ContactData.Email;
+                    contact.Wechat = ContactData.Wechat;
+                    contact.DateModified = DateTime.UtcNow;
+
+                    _dbContext.ContactTags.RemoveRange(contact.ContactTags);
+                    _dbContext.SaveChanges();
+
+                    if (selectedTags.Any())
+                    {
+                        var contactTags = CreateContactTags(contact.Id, selectedTags);
+                        _dbContext.ContactTags.AddRange(contactTags);
+                        _dbContext.SaveChanges();
+                    }
+                }
+            }
+            else
+            {
+                ContactData.DateCreated = DateTime.UtcNow;
+                ContactData.DateModified = DateTime.UtcNow;
+                _dbContext.Contacts.Add(ContactData);
                 _dbContext.SaveChanges();
+
+                if (selectedTags.Any())
+                {
+                    var contactTags = CreateContactTags(ContactData.Id, selectedTags);
+                    _dbContext.ContactTags.AddRange(contactTags);
+                    _dbContext.SaveChanges();
+                }
             }
 
             transaction.Commit();
+            GetContacts();
             IsPopupOpen = false;
             ContactData = new ContactModel();
             Ftvm.SetSelectedTag([]);
         }
         catch (Exception ex)
         {
-            transaction.Rollback();
+            transaction?.Rollback();
             HasErrors = true;
             ErrorMessage = ex.Message;
         }
+    }
+
+    private List<ContactTagModel> CreateContactTags(int contactId, List<TagModel> selectedTags)
+    {
+        return selectedTags.Select(t => new ContactTagModel
+        {
+            ContactId = contactId,
+            TagId = t.Id,
+            CreateTime = DateTime.UtcNow,
+            DateModified = DateTime.UtcNow
+        }).ToList();
     }
 
     [RelayCommand]
@@ -111,8 +172,15 @@ public partial class ContactViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ShowPopupToUpdate()
+    private void ShowPopupToUpdate(ContactModel contact)
     {
+        if (contact == null) return;
+        var t = contact.ContactTags.Select(ct => ct.Tag).ToList();
+        Ftvm.SetSelectedTag(t);
+        ContactData = contact;
+        HasErrors = false;
+        ErrorMessage = string.Empty;
+        IsPopupOpen = true;
     }
 
     [RelayCommand]
