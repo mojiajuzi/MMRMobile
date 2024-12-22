@@ -1,6 +1,8 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using MMRMobile.Components.FilterTag;
 using MMRMobile.Data;
 using MMRMobile.Models;
@@ -23,10 +25,22 @@ public partial class ContactViewModel : ViewModelBase
 
     private readonly AppDbContext _dbContext;
 
+    [ObservableProperty] private ObservableCollection<ContactModel> _contacts;
+
     public ContactViewModel(AppDbContext dbContext, FilterTagViewModel filterTagViewModel)
     {
         _dbContext = dbContext;
         Ftvm = filterTagViewModel;
+        GetContacts();
+    }
+
+    private void GetContacts()
+    {
+        var c = _dbContext.Contacts.AsNoTracking().Include(t => t.ContactTags).ToList();
+        if (c.Count != 0)
+        {
+            Contacts = new ObservableCollection<ContactModel>(c);
+        }
     }
 
     [RelayCommand]
@@ -55,7 +69,7 @@ public partial class ContactViewModel : ViewModelBase
             _dbContext.SaveChanges();
 
             var selectedTags = Ftvm.GetSelectedTags();
-            if (selectedTags.Any())
+            if (selectedTags.Count != 0)
             {
                 var contactTags = selectedTags.Select(t => new ContactTagModel
                 {
@@ -86,5 +100,20 @@ public partial class ContactViewModel : ViewModelBase
     {
         IsPopupOpen = false;
         ContactData = null;
+    }
+
+    [RelayCommand]
+    private void ShowContactWork()
+    {
+    }
+
+    [RelayCommand]
+    private void ShowPopupToUpdate()
+    {
+    }
+
+    [RelayCommand]
+    private void RemoveContact()
+    {
     }
 }
