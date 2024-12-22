@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
             var folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var dbPath = Path.Combine(folder, "MMRMobile", "MMRMobile.db");
             Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
-            
+
             // 禁用外键约束
             optionsBuilder.UseSqlite($"Data Source={dbPath};Foreign Keys=False");
         }
@@ -33,6 +33,9 @@ public class AppDbContext : DbContext
     public DbSet<TagModel> Tags { get; set; }
     public DbSet<ContactModel> Contacts { get; set; }
     public DbSet<ContactTagModel> ContactTags { get; set; }
+    public DbSet<WorkContactModel> WorkContacts { get; set; }
+    public DbSet<WorkTagModel> WorkTags { get; set; }
+    public DbSet<WorkModel> Works { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +49,25 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
             entity.Property(ct => ct.CreateTime).IsRequired();
             entity.Property(ct => ct.DateModified).IsRequired();
+        });
+        modelBuilder.Entity<WorkTagModel>(entity =>
+        {
+            entity.HasKey(ct => new { ct.WorkId, ct.TagId });
+            entity.HasOne<WorkModel>(wt => wt.Work).WithMany(w => w.WorkTags).HasForeignKey(t => t.WorkId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne<TagModel>(t => t.Tag).WithMany(t => t.WorkTags).HasForeignKey(ct => ct.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entity.Property(ct => ct.CreateTime).IsRequired();
+            entity.Property(ct => ct.DateModified).IsRequired();
+        });
+        modelBuilder.Entity<WorkContactModel>(entity =>
+        {
+            entity.HasKey(ct => new { ct.WorkId, ct.ContactId });
+
+            entity.HasOne<WorkModel>(wc => wc.Work).WithMany(w => w.WorkContacts).HasForeignKey(ct => ct.WorkId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne<ContactModel>(c => c.Contact).WithMany(c => c.WorkContacts).HasForeignKey(ct => ct.ContactId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

@@ -17,4 +17,5 @@ public class TagModel : BaseModel
     [Required(ErrorMessage = "请设置标签状态")] public bool Active { get; set; } = true;
 
     public virtual ICollection<ContactTagModel> ContactTags { get; set; } = new List<ContactTagModel>();
+    public virtual ICollection<WorkTagModel> WorkTags { get; set; } = new List<WorkTagModel>();
 }
