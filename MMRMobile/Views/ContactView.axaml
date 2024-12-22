@@ -70,8 +70,8 @@
                                         Content="取消" />
                                 <Button Classes="Update"
                                         HorizontalAlignment="Right"
-                                        Command="{Binding ContactSubmiteCommand }"
-                                        CommandParameter="{Binding}"
+                                        Command="{Binding ContactSubmitCommand }"
+                                        CommandParameter="{Binding .}"
                                         Content="提交" />
                             </UniformGrid>
                         </StackPanel>
