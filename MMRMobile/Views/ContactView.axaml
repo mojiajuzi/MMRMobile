@@ -26,69 +26,65 @@
         </Grid>
         <Grid Row="1">
             <ItemsControl x:Name="Root" ItemsSource="{Binding Contacts}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="{x:Type model:ContactModel}">
                         <Border Classes="Card">
-                            <StackPanel Orientation="Horizontal" Classes="Card">
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Classes="icon">
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Classes="icon">
-                                        <TextBlock Text="{Binding Phone}"></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Classes="icon">
-                                        <TextBlock Text="{Binding Email}"></TextBlock>
-                                    </StackPanel>
-                                    <!-- tags start-->
-                                    <ItemsControl ItemsSource="{Binding ContactTags}" Padding="0,10">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal"
-                                                           MaxWidth="200" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate DataType="{x:Type model:ContactTagModel}">
-                                                <Border Classes="tag">
-                                                    <TextBlock Text="{Binding Tag.Name}" />
-                                                </Border>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                    <!-- tags show end-->
-                                    <!-- show action button-->
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Classes="Action Info"
-                                                Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowContactWorkCommand}"
-                                                CommandParameter="{Binding .}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="查看"></TextBlock>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button Classes="Action Update"
-                                                Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowPopupToUpdateCommand}"
-                                                CommandParameter="{Binding .}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="编辑"></TextBlock>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button Classes="Action Delete"
-                                                Command="{Binding #Root.((vm:ContactViewModel)DataContext).RemoveContactCommand}"
-                                                CommandParameter="{Binding .}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="删除"></TextBlock>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                    <!-- end action button-->
-
+                            <StackPanel Classes="Card">
+                                <StackPanel Classes="Icon">
+                                    <TextBlock Classes="Icon" Text="&#xf007;"></TextBlock>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
+                                <StackPanel Classes="Icon">
+                                    <TextBlock Classes="Icon" Text="&#xf095;"></TextBlock>
+                                    <TextBlock Text="{Binding Phone}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Classes="Icon" VerticalAlignment="Center">
+                                    <TextBlock Classes="Icon" Text="&#xf0e0;" TextAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Email}" TextAlignment="Center"></TextBlock>
+                                </StackPanel>
+                                <!-- tags start-->
+                                <ItemsControl ItemsSource="{Binding ContactTags}" Padding="0,10">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"
+                                                       HorizontalAlignment="Left"
+                                                       MaxWidth="200" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type model:ContactTagModel}">
+                                            <Border Classes="Tag">
+                                                <TextBlock Text="{Binding Tag.Name}" TextAlignment="Center" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <!-- tags show end-->
+                                <!-- show action button-->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Classes="Action Info"
+                                            Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowContactWorkCommand}"
+                                            CommandParameter="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="查看"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="Action Update"
+                                            Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowPopupToUpdateCommand}"
+                                            CommandParameter="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="编辑"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="Action Delete"
+                                            Command="{Binding #Root.((vm:ContactViewModel)DataContext).RemoveContactCommand}"
+                                            CommandParameter="{Binding .}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="删除"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <!-- end action button-->
                             </StackPanel>
                         </Border>
                     </DataTemplate>

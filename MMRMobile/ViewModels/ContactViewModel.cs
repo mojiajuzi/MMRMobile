@@ -36,7 +36,10 @@ public partial class ContactViewModel : ViewModelBase
 
     private void GetContacts()
     {
-        var c = _dbContext.Contacts.AsNoTracking().Include(t => t.ContactTags).ToList();
+        var c = _dbContext.Contacts.AsNoTracking()
+            .Include(t => t.ContactTags)
+            .ThenInclude(model => model.Tag)
+            .ToList();
         if (c.Count != 0)
         {
             Contacts = new ObservableCollection<ContactModel>(c);

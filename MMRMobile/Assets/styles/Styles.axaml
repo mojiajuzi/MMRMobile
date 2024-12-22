@@ -10,7 +10,7 @@
     <Style Selector="Border.DockBox">
         <Setter Property="Margin" Value="40,20"></Setter>
         <Setter Property="Padding" Value="10,8"></Setter>
-        <Setter Property="BoxShadow" Value="8 5 20 DarkGray"></Setter>
+        <Setter Property="BoxShadow" Value="2 2 8 DarkGray"></Setter>
         <Setter Property="CornerRadius" Value="20"></Setter>
     </Style>
     <Style Selector="StackPanel.DockContainer">
@@ -34,6 +34,8 @@
 
     <Style Selector="TextBlock.Icon">
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"></Setter>
+        <Setter Property="Margin" Value="0,0,8,0"></Setter>
+        <Setter Property="TextAlignment" Value="Center"></Setter>
     </Style>
 
     <Style Selector="TextBox.Search">
@@ -88,5 +90,35 @@
         <Setter Property="Margin" Value="0,0,0,10"></Setter>
     </Style>
 
+
+    <Style Selector="Border.Card">
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"></Setter>
+        <Setter Property="Margin" Value="8,10"></Setter>
+        <Setter Property="Width" Value="400"></Setter>
+        <Setter Property="BoxShadow" Value="1 1 4 DarkGray"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Padding" Value="12"></Setter>
+        <Setter Property="CornerRadius" Value="8"></Setter>
+    </Style>
+
+    <Style Selector="StackPanel.Card">
+        <Setter Property="Orientation" Value="Vertical"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Spacing" Value="4"></Setter>
+    </Style>
+    <Style Selector="Border.Tag">
+        <Setter Property="Height" Value="20"></Setter>
+        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"></Setter>
+        <Setter Property="CornerRadius" Value="8"></Setter>
+        <Setter Property="Margin" Value="0,0,4,0"></Setter>
+        <Setter Property="Padding" Value="10,0"></Setter>
+    </Style>
+
+    <Style Selector="StackPanel.Icon">
+        <Setter Property="Orientation" Value="Horizontal"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
 
 </Styles>
