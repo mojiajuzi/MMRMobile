@@ -19,16 +19,20 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (optionsBuilder.IsConfigured) return;
-        var folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var dbPath = Path.Combine(folder, "MMRMobile", "MMRMobile.db");
-        Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
-        optionsBuilder.UseSqlite($"Data Source={dbPath}");
+        if (!optionsBuilder.IsConfigured)
+        {
+            var folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var dbPath = Path.Combine(folder, "MMRMobile", "MMRMobile.db");
+            Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
+            
+            // 禁用外键约束
+            optionsBuilder.UseSqlite($"Data Source={dbPath};Foreign Keys=False");
+        }
     }
 
     public DbSet<TagModel> Tags { get; set; }
-    public DbSet<ContactTagModel> ContactTags { get; set; }
     public DbSet<ContactModel> Contacts { get; set; }
+    public DbSet<ContactTagModel> ContactTags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

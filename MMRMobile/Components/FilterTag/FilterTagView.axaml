@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MMRMobile.Components.FilterTag"
+             xmlns:model="clr-namespace:MMRMobile.Models"
+             x:DataType="vm:FilterTagViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MMRMobile.Components.FilterTag.FilterTagView">
+    <StackPanel>
+        <AutoCompleteBox Name="TagSearchBox"
+                         Classes="tagSearch"
+                         FilterMode="None"
+                         Text="{Binding SearchText}"
+                         ItemsSource="{Binding FilteredTags}"
+                         Watermark="搜索"
+                         SelectionChanged="TagSearchBox_OnSelectionChanged">
+            <AutoCompleteBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:TagModel}">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </AutoCompleteBox.ItemTemplate>
+        </AutoCompleteBox>
+        <ListBox x:Name="VModel"
+                 Classes="tagList"
+                 ItemsSource="{Binding SelectedTags}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Classes="SearchResult">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="{Binding Name}"
+                                       VerticalAlignment="Center" />
+                            <Button Classes="SearchResult"
+                                    Command="{Binding #VModel.((vm:FilterTagViewModel)DataContext).RemoveTagCommand}"
+                                    CommandParameter="{Binding}">
+                                <TextBlock Text="×"
+                                           VerticalAlignment="Center" />
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</UserControl>

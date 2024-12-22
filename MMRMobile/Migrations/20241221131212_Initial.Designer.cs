@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MMRMobile.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241220151542_addContact")]
-    partial class addContact
+    [Migration("20241221131212_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

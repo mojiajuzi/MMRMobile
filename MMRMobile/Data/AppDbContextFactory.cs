@@ -14,7 +14,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
         var dbPath = Path.Combine(folder, "MMRMobile", "MMRMobile.db");
         Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
 
-        optionsBuilder.UseSqlite($"Data Source={dbPath}");
+        optionsBuilder.UseSqlite($"Data Source={dbPath};Foreign Keys=False");
 
         return new AppDbContext(optionsBuilder.Options);
     }

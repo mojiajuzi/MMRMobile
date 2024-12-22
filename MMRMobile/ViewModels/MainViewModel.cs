@@ -24,6 +24,7 @@ public partial class MainViewModel : ViewModelBase
         CurrentView = name switch
         {
             "Tag" => _serviceProvider.GetRequiredService<TagViewModel>(),
+            "Contact" => _serviceProvider.GetRequiredService<ContactViewModel>(),
             _ => CurrentView
         };
     }

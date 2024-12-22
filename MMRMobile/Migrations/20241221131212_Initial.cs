@@ -6,11 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MMRMobile.Migrations
 {
     /// <inheritdoc />
-    public partial class addContact : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tags", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Contacts",
                 columns: table => new
@@ -78,6 +94,12 @@ namespace MMRMobile.Migrations
                 name: "IX_ContactTags_TagId",
                 table: "ContactTags",
                 column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tags_Name",
+                table: "tags",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -88,6 +110,9 @@ namespace MMRMobile.Migrations
 
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "tags");
         }
     }
 }

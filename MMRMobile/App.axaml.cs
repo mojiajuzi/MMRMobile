@@ -7,6 +7,7 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MMRMobile.Components.Dock;
+using MMRMobile.Components.FilterTag;
 using MMRMobile.Data;
 using MMRMobile.ViewModels;
 using MMRMobile.Views;
@@ -35,6 +36,7 @@ public partial class App : Application
         _services?.AddSingleton<MainViewModel>();
         _services?.AddSingleton<DockViewModel>();
         _services?.AddTransient<TagViewModel>();
+        _services?.AddTransient<FilterTagViewModel>();
         _services?.AddTransient<ContactViewModel>();
     }
 
