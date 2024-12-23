@@ -10,6 +10,19 @@
         <AndroidPackageFormat>apk</AndroidPackageFormat>
         <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     </PropertyGroup>
+    <PropertyGroup Label="Avalonia">
+        <AvaloniaUseCompiledBindingsByDefault>False</AvaloniaUseCompiledBindingsByDefault>
+        <AvaloniaXamlIlDebuggerLaunch>False</AvaloniaXamlIlDebuggerLaunch>
+        <AvaloniaXamlVerboseExceptions>False</AvaloniaXamlVerboseExceptions>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <RunAOTCompilation>False</RunAOTCompilation>
+        <PublishTrimmed>False</PublishTrimmed>
+        <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+    </PropertyGroup>
 
     <ItemGroup>
         <AndroidResource Include="Icon.png">

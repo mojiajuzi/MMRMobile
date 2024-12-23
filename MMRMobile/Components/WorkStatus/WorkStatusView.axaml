@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MMRMobile.Components.WorkStatus"
+             xmlns:e="clr-namespace:MMRMobile.Models.Enums"
+             x:DataType="vm:WorkStatusViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MMRMobile.Components.WorkStatus.WorkStatusView">
+    <StackPanel>
+        <TextBlock Text="状态"></TextBlock>
+        <ComboBox
+            HorizontalAlignment="Stretch"
+            SelectedItem="{Binding SelectedStatus}"
+            ItemsSource="{Binding WorkStatuses}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type e:WorkStatusEnum}">
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </StackPanel>
+</UserControl>

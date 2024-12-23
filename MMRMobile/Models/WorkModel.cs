@@ -13,7 +13,7 @@ public class WorkModel : BaseModel
     public string Name { get; set; }
 
     [MaxLength(250, ErrorMessage = "项目描述不能超过250字符")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
     public DateTime StartAt { get; set; }

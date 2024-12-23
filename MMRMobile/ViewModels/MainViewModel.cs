@@ -25,6 +25,7 @@ public partial class MainViewModel : ViewModelBase
         {
             "Tag" => _serviceProvider.GetRequiredService<TagViewModel>(),
             "Contact" => _serviceProvider.GetRequiredService<ContactViewModel>(),
+            "Work" => _serviceProvider.GetRequiredService<WorkViewModel>(),
             _ => CurrentView
         };
     }

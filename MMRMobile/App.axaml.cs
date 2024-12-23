@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MMRMobile.Components.Dock;
 using MMRMobile.Components.FilterTag;
+using MMRMobile.Components.WorkStatus;
 using MMRMobile.Data;
 using MMRMobile.ViewModels;
 using MMRMobile.Views;
@@ -38,6 +39,8 @@ public partial class App : Application
         _services?.AddTransient<TagViewModel>();
         _services?.AddTransient<FilterTagViewModel>();
         _services?.AddTransient<ContactViewModel>();
+        _services?.AddTransient<WorkStatusViewModel>();
+        _services?.AddTransient<WorkViewModel>();
     }
 
     public override void OnFrameworkInitializationCompleted()

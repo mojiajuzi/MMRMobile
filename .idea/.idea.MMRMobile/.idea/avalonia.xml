@@ -9,10 +9,12 @@
         <entry key="MMRMobile/Components/Dock/Dock.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Components/Dock/DockView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Components/FilterTag/FilterTagView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Components/WorkStatus/WorkStatusView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Views/ContactView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Views/MainView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Views/MainWindow.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Views/TagView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Views/WorkView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
       </map>
     </option>
   </component>

@@ -75,6 +75,7 @@
 
     <Style Selector="Border.Popup">
         <Setter Property="Width" Value="300"></Setter>
+        <Setter Property="Background" Value="White"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="BoxShadow" Value="0 0 8 0 #66000000, 0 0 2 0 #33000000, 0 4 16 0 #1A000000" />
         <Setter Property="HorizontalAlignment" Value="Center" />
