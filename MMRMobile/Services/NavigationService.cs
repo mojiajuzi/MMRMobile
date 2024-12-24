@@ -9,6 +9,7 @@ public class NavigationService : INavigationService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly Stack<ViewModelBase> _navigationStack = new();
+    private ViewModelBase _currentViewModel;
 
     public event EventHandler<NavigationEventArgs> OnNavigated;
 
@@ -21,11 +22,13 @@ public class NavigationService : INavigationService
     {
         var viewModel = _serviceProvider.GetRequiredService<T>();
 
-        // 如果有当前视图，将其压入栈
-        if (_navigationStack.Count > 0)
+        // 如果有当前视图模型，将其压入栈
+        if (_currentViewModel != null)
         {
-            _navigationStack.Push(_navigationStack.Peek());
+            _navigationStack.Push(_currentViewModel);
         }
+
+        _currentViewModel = viewModel;
 
         // 某些视图不显示DockView（如详情页）
         bool showDock = typeof(T) != typeof(WorkDetailViewModel);
@@ -44,6 +47,13 @@ public class NavigationService : INavigationService
         if (_navigationStack.Count > 0)
         {
             var previousViewModel = _navigationStack.Pop();
+            _currentViewModel = previousViewModel;
+            
+            if (previousViewModel is INavigationAware navigationAware)
+            {
+                navigationAware.OnNavigatedTo(null);
+            }
+
             OnNavigated?.Invoke(this, new NavigationEventArgs(previousViewModel, true));
         }
     }

@@ -25,15 +25,17 @@ public partial class WorkPopViewModel : ViewModelBase, INavigationAware
     [ObservableProperty] private DateTimeOffset _selectedEndAt;
     [ObservableProperty] private WorkStatusViewModel _workStatusView;
     [ObservableProperty] private FilterTagViewModel _filterTagView;
+    private readonly INavigationService _navigationService;
 
     private readonly AppDbContext _dbContext;
 
     public WorkPopViewModel(AppDbContext appDbContext, FilterTagViewModel filterTagView,
-        WorkStatusViewModel workStatusView)
+        WorkStatusViewModel workStatusView, INavigationService navigationService)
     {
         _dbContext = appDbContext;
         _filterTagView = filterTagView;
         _workStatusView = workStatusView;
+        _navigationService = navigationService;
     }
 
     [RelayCommand]
@@ -103,6 +105,7 @@ public partial class WorkPopViewModel : ViewModelBase, INavigationAware
             transaction.Commit();
             WorkData = new WorkModel();
             FilterTagView.SetSelectedTag([]);
+            Back();
         }
         catch (Exception ex)
         {
@@ -130,6 +133,7 @@ public partial class WorkPopViewModel : ViewModelBase, INavigationAware
             WorkData = work;
             SelectedStartAt = work.StartAt;
             SelectedEndAt = work.EndAt;
+            FilterTagView.SetSelectedTag(work.WorkTags.Select(wt => wt.Tag).ToList());
         }
         else
         {
@@ -137,5 +141,11 @@ public partial class WorkPopViewModel : ViewModelBase, INavigationAware
             SelectedStartAt = DateTimeOffset.UtcNow;
             SelectedEndAt = DateTimeOffset.UtcNow;
         }
+    }
+
+    [RelayCommand]
+    private void Back()
+    {
+        _navigationService.NavigateBack();
     }
 }
