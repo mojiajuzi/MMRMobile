@@ -9,6 +9,7 @@ using MMRMobile.Components.FilterTag;
 using MMRMobile.Components.WorkStatus;
 using MMRMobile.Data;
 using MMRMobile.Models;
+using MMRMobile.Services;
 
 namespace MMRMobile.ViewModels;
 
@@ -25,14 +26,16 @@ public partial class WorkViewModel : ViewModelBase
     [ObservableProperty] private FilterTagViewModel _filterTagView;
     [ObservableProperty] private ObservableCollection<WorkModel> _works;
     private readonly AppDbContext _dbContext;
+    private readonly INavigationService _navigationService;
 
     public WorkViewModel(AppDbContext appDbContext, WorkStatusViewModel workStatusView,
-        FilterTagViewModel filterTagView)
+        FilterTagViewModel filterTagView, INavigationService navigationService)
     {
         _dbContext = appDbContext;
         WorkData = new WorkModel();
         WorkStatusView = workStatusView;
         FilterTagView = filterTagView;
+        _navigationService = navigationService;
         GetWorks();
     }
 
@@ -152,8 +155,9 @@ public partial class WorkViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void OpenDetails()
+    private void OpenDetails(WorkModel work)
     {
+        _navigationService.NavigateTo<WorkDetailViewModel>(work);
     }
 
     [RelayCommand]

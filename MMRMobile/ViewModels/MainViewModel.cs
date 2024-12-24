@@ -6,27 +6,45 @@ using Microsoft.Extensions.DependencyInjection;
 using MMRMobile.Components.Dock;
 using MMRMobile.Data;
 using MMRMobile.Views;
+using MMRMobile.Services;
 
 namespace MMRMobile.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    private readonly IServiceProvider _serviceProvider;
-    [ObservableProperty] private ViewModelBase _currentView;
+    private readonly INavigationService _navigationService;
 
-    public MainViewModel(IServiceProvider serviceProvider)
+    [ObservableProperty] private ViewModelBase _currentView;
+    [ObservableProperty] private bool _showDock = true;
+
+    public MainViewModel(INavigationService navigationService)
     {
-        _serviceProvider = serviceProvider;
+        _navigationService = navigationService;
+        _navigationService.OnNavigated += NavigationService_OnNavigated;
+
+        // 设置初始视图为TagView
+        _navigationService.NavigateTo<ContactViewModel>();
     }
 
-    public void ChangeCurrentViewModel(string name)
+    private void NavigationService_OnNavigated(object sender, NavigationEventArgs e)
     {
-        CurrentView = name switch
+        CurrentView = e.ViewModel;
+        ShowDock = e.ShowDock;
+    }
+
+    public void ChangeCurrentViewModel(string viewName)
+    {
+        switch (viewName)
         {
-            "Tag" => _serviceProvider.GetRequiredService<TagViewModel>(),
-            "Contact" => _serviceProvider.GetRequiredService<ContactViewModel>(),
-            "Work" => _serviceProvider.GetRequiredService<WorkViewModel>(),
-            _ => CurrentView
-        };
+            case "Tag":
+                _navigationService.NavigateTo<TagViewModel>();
+                break;
+            case "Contact":
+                _navigationService.NavigateTo<ContactViewModel>();
+                break;
+            case "Work":
+                _navigationService.NavigateTo<WorkViewModel>();
+                break;
+        }
     }
 }

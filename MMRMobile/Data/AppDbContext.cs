@@ -36,6 +36,7 @@ public class AppDbContext : DbContext
     public DbSet<WorkContactModel> WorkContacts { get; set; }
     public DbSet<WorkTagModel> WorkTags { get; set; }
     public DbSet<WorkModel> Works { get; set; }
+    public DbSet<WorkPaymentModel> WorkPayments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,6 +69,30 @@ public class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
             entity.HasOne<ContactModel>(c => c.Contact).WithMany(c => c.WorkContacts).HasForeignKey(ct => ct.ContactId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            entity.Property(wc => wc.Amount)
+                .HasColumnType("decimal(18,2)");
+
+            entity.Property(wc => wc.IsCome)
+                .HasDefaultValue(false);
+        });
+        modelBuilder.Entity<WorkPaymentModel>(entity =>
+        {
+            entity.HasOne(wp => wp.Work)
+                .WithMany(w => w.WorkPayments)
+                .HasForeignKey(wp => wp.WorkId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(wp => wp.Contact)
+                .WithMany(c => c.WorkPayments)
+                .HasForeignKey(wp => wp.ContactId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            entity.Property(wp => wp.Amount)
+                .HasColumnType("decimal(18,2)");
+
+            entity.Property(wp => wp.PaymentDate)
+                .IsRequired();
         });
     }
 }

@@ -26,4 +26,5 @@ public class ContactModel : BaseModel
 
     public ICollection<ContactTagModel> ContactTags { get; set; } = new List<ContactTagModel>();
     public virtual ICollection<WorkContactModel> WorkContacts { get; set; } = new List<WorkContactModel>();
+    public virtual ICollection<WorkPaymentModel> WorkPayments { get; set; } = new List<WorkPaymentModel>();
 }

@@ -1,7 +1,6 @@
 using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
@@ -10,12 +9,13 @@ using MMRMobile.Components.Dock;
 using MMRMobile.Components.FilterTag;
 using MMRMobile.Components.WorkStatus;
 using MMRMobile.Data;
+using MMRMobile.Services;
 using MMRMobile.ViewModels;
 using MMRMobile.Views;
 
 namespace MMRMobile;
 
-public partial class App : Application
+public class App : Application
 {
     public IServiceProvider _serviceProvider { get; private set; }
     private IServiceCollection? _services;
@@ -28,10 +28,12 @@ public partial class App : Application
         _serviceProvider = _services.BuildServiceProvider();
     }
 
-    private void RegisterServices()
+    private new void RegisterServices()
     {
         var factory = new AppDbContextFactory();
         var dbContext = factory.CreateDbContext([]);
+
+        _services?.AddSingleton<INavigationService, NavigationService>();
 
         _services?.AddSingleton<AppDbContext>(dbContext);
         _services?.AddSingleton<MainViewModel>();
@@ -41,6 +43,7 @@ public partial class App : Application
         _services?.AddTransient<ContactViewModel>();
         _services?.AddTransient<WorkStatusViewModel>();
         _services?.AddTransient<WorkViewModel>();
+        _services?.AddTransient<WorkDetailViewModel>();
     }
 
     public override void OnFrameworkInitializationCompleted()
@@ -61,7 +64,7 @@ public partial class App : Application
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                // 使用 DI 创建 MainViewModel
+                // 使用 DI ��建 MainViewModel
                 var mainViewModel = _serviceProvider!.GetRequiredService<MainViewModel>();
                 desktop.MainWindow = new MainWindow
                 {

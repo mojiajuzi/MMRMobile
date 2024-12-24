@@ -10,6 +10,13 @@ public class WorkContactModel
     public int ContactId { get; set; }
     public virtual ContactModel Contact { get; set; }
 
-    [Required] public DateTime CreateTime { get; set; } = DateTime.UtcNow;
-    [Required] public DateTime DateModified { get; set; } = DateTime.UtcNow;
+    [DisplayFormat(DataFormatString = "{0:c2}", ApplyFormatInEditMode = true)]
+    public decimal Amount { get; set; }  // 金额
+
+    public bool IsCome { get; set; } = false;  // 是否来访，默认为false
+
+    [Required]
+    public DateTime CreateTime { get; set; } = DateTime.UtcNow;
+    [Required]
+    public DateTime DateModified { get; set; } = DateTime.UtcNow;
 }
