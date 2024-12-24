@@ -103,60 +103,6 @@
             </ItemsControl>
         </Grid>
         <Grid Row="2">
-            <Border>
-                <Popup Name="WorkCreatePopup"
-                       IsOpen="{Binding IsPopupOpen}"
-                       Placement="AnchorAndGravity"
-                       WindowManagerAddShadowHint="False"
-                       PlacementTarget="{Binding $parent[UserControl]}">
-                    <Border Classes="Popup">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Classes="ShowError"
-                                       IsVisible="{Binding HasErrors}"
-                                       Text="{Binding ErrorMessage}" />
-                            <TextBlock Text="名称"></TextBlock>
-                            <TextBox Name="Name" Text="{Binding WorkData.Name}"></TextBox>
-                            <TextBlock Text="说明"></TextBlock>
-                            <TextBox Name="Description"
-                                     Text="{Binding WorkData.Description}"
-                                     AcceptsReturn="True"
-                                     TextWrapping="Wrap">
-                            </TextBox>
-                            <TextBlock Text="项目金额"></TextBlock>
-                            <TextBox Name="Funds"
-                                     Text="{Binding WorkData.Funds}">
-                            </TextBox>
-                            <StackPanel>
-                                <TextBlock Text="开始时间"></TextBlock>
-                                <DatePicker
-                                    DayFormat="ddd dd"
-                                    SelectedDate="{Binding SelectedStartAt}">
-                                </DatePicker>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock Text="结束时间"></TextBlock>
-                                <DatePicker
-                                    DayFormat="ddd dd"
-                                    SelectedDate="{Binding SelectedEndAt}">
-                                </DatePicker>
-                            </StackPanel>
-                            <e:WorkStatusView DataContext="{Binding WorkStatusView}"></e:WorkStatusView>
-                            <t:FilterTagView DataContext="{Binding FilterTagView}"></t:FilterTagView>
-                            <UniformGrid Rows="1" Columns="2">
-                                <Button
-                                    Classes="Cancel"
-                                    Command="{Binding ClosePopupCommand}"
-                                    Content="取消" />
-                                <Button
-                                    Classes="Update"
-                                    HorizontalAlignment="Right"
-                                    Command="{Binding WorkSubmitCommand}"
-                                    Content="提交" />
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-                </Popup>
-            </Border>
         </Grid>
     </Grid>
 </UserControl>

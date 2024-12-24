@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:e="clr-namespace:MMRMobile.Components.WorkStatus"
+             xmlns:t="clr-namespace:MMRMobile.Components.FilterTag"
+             xmlns:model="clr-namespace:MMRMobile.Models"
+             xmlns:vm="clr-namespace:MMRMobile.Components.WorkPop"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:WorkPopViewModel"
+             x:Class="MMRMobile.Components.WorkPop.WorkPopView">
+    <Border>
+        <StackPanel HorizontalAlignment="Center" Spacing="8">
+            <TextBlock Classes="ShowError"
+                       IsVisible="{Binding HasErrors}"
+                       Text="{Binding ErrorMessage}" />
+            <TextBlock Text="名称"></TextBlock>
+            <TextBox Name="Name" Text="{Binding WorkData.Name}"></TextBox>
+            <TextBlock Text="说明"></TextBlock>
+            <TextBox Name="Description"
+                     Text="{Binding WorkData.Description}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap">
+            </TextBox>
+            <TextBlock Text="项目金额"></TextBlock>
+            <TextBox Name="Funds"
+                     Text="{Binding WorkData.Funds}">
+            </TextBox>
+            <StackPanel>
+                <TextBlock Text="开始时间"></TextBlock>
+                <DatePicker
+                    DayFormat="ddd dd"
+                    SelectedDate="{Binding SelectedStartAt}">
+                </DatePicker>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="结束时间"></TextBlock>
+                <DatePicker
+                    DayFormat="ddd dd"
+                    SelectedDate="{Binding SelectedEndAt}">
+                </DatePicker>
+            </StackPanel>
+            <StackPanel>
+                <e:WorkStatusView DataContext="{Binding WorkStatusView}"></e:WorkStatusView>
+            </StackPanel>
+            <StackPanel>
+                <t:FilterTagView DataContext="{Binding FilterTagView}"></t:FilterTagView>
+            </StackPanel>
+            <UniformGrid Rows="1">
+                <Button
+                    Classes="Update"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding WorkSubmitCommand}"
+                    Content="提交" />
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>
