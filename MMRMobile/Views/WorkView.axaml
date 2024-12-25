@@ -42,32 +42,28 @@
                                         <TextBlock Text="{Binding Status}" />
                                     </Border>
                                 </Grid>
-                                <Grid ColumnDefinitions="*,*">
-                                    <StackPanel Grid.Column="0" Spacing="2" Orientation="Horizontal">
-                                        <TextBlock Text="开始" Classes="Caption" />
-                                        <TextBlock Text="{Binding StartAt, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                <Grid ColumnDefinitions="*,*,*" Margin="0,4">
+                                    <StackPanel Grid.Column="0" Spacing="2">
+                                        <TextBlock Text="预算"
+                                                   Classes="Caption" />
+                                        <TextBlock Text="{Binding Funds, StringFormat='￥{0:N2}'}"
                                                    Classes="Body" />
                                     </StackPanel>
-                                    <StackPanel Grid.Column="1" Spacing="2" Orientation="Horizontal">
-                                        <TextBlock Text="完结" Classes="Caption" />
-                                        <TextBlock Text="{Binding EndAt, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                    <StackPanel Grid.Column="1" Spacing="2">
+                                        <TextBlock Text="收入"
+                                                   Classes="Caption" />
+                                        <TextBlock Text="{Binding TotalIncome, StringFormat='￥{0:N2}'}"
+                                                   Foreground="{StaticResource SuccessGreen}"
+                                                   Classes="Body" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Spacing="2">
+                                        <TextBlock Text="支出"
+                                                   Classes="Caption" />
+                                        <TextBlock Text="{Binding TotalExpense, StringFormat='￥{0:N2}'}"
+                                                   Foreground="{StaticResource ErrorRed}"
                                                    Classes="Body" />
                                     </StackPanel>
                                 </Grid>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Classes="icon" Orientation="Vertical">
-                                        <TextBlock Text="{Binding Funds, StringFormat='￥{0:N2}'}" />
-                                        <TextBlock Text="费用" Classes="label" />
-                                    </StackPanel>
-                                </StackPanel>
-                                <StackPanel>
-                                    <TextBlock Text="项目描述" Classes="Caption" />
-                                    <TextBlock Text="{Binding Description}"
-                                               TextWrapping="Wrap"
-                                               MaxLines="2"
-                                               TextTrimming="CharacterEllipsis"
-                                               Classes="Body" />
-                                </StackPanel>
                                 <StackPanel Orientation="Horizontal"
                                             Spacing="8"
                                             HorizontalAlignment="Right">

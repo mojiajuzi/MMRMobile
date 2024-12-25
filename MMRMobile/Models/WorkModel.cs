@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using MMRMobile.Models.Enums;
 
 namespace MMRMobile.Models;
@@ -30,4 +31,13 @@ public class WorkModel : BaseModel
     public virtual ICollection<WorkTagModel> WorkTags { get; set; } = new List<WorkTagModel>();
     public virtual ICollection<WorkContactModel> WorkContacts { get; set; } = new List<WorkContactModel>();
     public virtual ICollection<WorkPaymentModel> WorkPayments { get; set; } = new List<WorkPaymentModel>();
+
+    [NotMapped]
+    public decimal TotalIncome => WorkPayments?.Where(p => p.IsIncome).Sum(p => p.Amount) ?? 0;
+
+    [NotMapped]
+    public decimal TotalExpense => WorkPayments?.Where(p => !p.IsIncome).Sum(p => p.Amount) ?? 0;
+
+    [NotMapped]
+    public decimal Balance => TotalIncome - TotalExpense;
 }

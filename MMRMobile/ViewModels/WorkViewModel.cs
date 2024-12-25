@@ -32,7 +32,7 @@ public partial class WorkViewModel : ViewModelBase
 
     private void GetWorks()
     {
-        var w = _dbContext.Works.AsNoTracking().Include(wt => wt.WorkTags).ThenInclude(wt => wt.Tag).ToList();
+        var w = _dbContext.Works.AsNoTracking().Include(wt => wt.WorkTags).ThenInclude(wt => wt.Tag).Include(w => w.WorkPayments).ToList();
         if (w.Count != 0)
         {
             Works = new ObservableCollection<WorkModel>(w);
