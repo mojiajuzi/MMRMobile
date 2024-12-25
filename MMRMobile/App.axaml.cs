@@ -7,6 +7,8 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MMRMobile.Components.Dock;
 using MMRMobile.Components.FilterTag;
+using MMRMobile.Components.WorkContact;
+using MMRMobile.Components.WorkPayment;
 using MMRMobile.Components.WorkPop;
 using MMRMobile.Components.WorkStatus;
 using MMRMobile.Data;
@@ -41,11 +43,13 @@ public class App : Application
         _services?.AddSingleton<DockViewModel>();
         _services?.AddTransient<TagViewModel>();
         _services?.AddTransient<FilterTagViewModel>();
+        _services?.AddTransient<WorkPopViewModel>();
         _services?.AddTransient<ContactViewModel>();
         _services?.AddTransient<WorkStatusViewModel>();
         _services?.AddTransient<WorkViewModel>();
+        _services?.AddTransient<WorkContactViewModel>();
+        _services?.AddTransient<WorkPaymentViewModel>();
         _services?.AddTransient<WorkDetailViewModel>();
-        _services?.AddTransient<WorkPopViewModel>();
     }
 
     public override void OnFrameworkInitializationCompleted()

@@ -1,3 +1,5 @@
+using MMRMobile.Components.WorkContact;
+using MMRMobile.Components.WorkPayment;
 using MMRMobile.Models;
 
 namespace MMRMobile.ViewModels;
@@ -12,9 +14,15 @@ public partial class WorkDetailViewModel : ViewModelBase, INavigationAware
 
     [ObservableProperty] private WorkModel _work;
 
-    public WorkDetailViewModel(INavigationService navigationService)
+    [ObservableProperty] private WorkContactViewModel _workContactViewModel;
+    [ObservableProperty] private WorkPaymentViewModel _workPaymentViewModel;
+
+    public WorkDetailViewModel(INavigationService navigationService, WorkContactViewModel workContactViewModel,
+        WorkPaymentViewModel workPaymentViewModel)
     {
         _navigationService = navigationService;
+        _workContactViewModel = workContactViewModel;
+        _workPaymentViewModel = workPaymentViewModel;
     }
 
     public void OnNavigatedTo(object parameter)
@@ -22,6 +30,8 @@ public partial class WorkDetailViewModel : ViewModelBase, INavigationAware
         if (parameter is WorkModel work)
         {
             Work = work;
+            WorkContactViewModel.Init(work.Id);
+            WorkPaymentViewModel.Initialize(work.Id);
         }
     }
 
