@@ -5,6 +5,7 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using MMRMobile.Components.ContactPop;
 using MMRMobile.Components.Dock;
 using MMRMobile.Components.FilterTag;
 using MMRMobile.Components.WorkContact;
@@ -44,6 +45,7 @@ public class App : Application
         _services?.AddTransient<TagViewModel>();
         _services?.AddTransient<FilterTagViewModel>();
         _services?.AddTransient<WorkPopViewModel>();
+        _services?.AddTransient<ContactPopViewModel>();
         _services?.AddTransient<ContactViewModel>();
         _services?.AddTransient<WorkStatusViewModel>();
         _services?.AddTransient<WorkViewModel>();

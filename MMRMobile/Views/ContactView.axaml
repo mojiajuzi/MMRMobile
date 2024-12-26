@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MMRMobile.ViewModels"
              xmlns:model="clr-namespace:MMRMobile.Models"
-             xmlns:ft="clr-namespace:MMRMobile.Components.FilterTag"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MMRMobile.Views.ContactView"
              x:DataType="vm:ContactViewModel">
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <Grid Grid.Row="0">
             <Grid ColumnDefinitions="80*,20*" VerticalAlignment="Center">
                 <Grid Column="0">
@@ -90,61 +89,6 @@
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
             </ItemsControl>
-        </Grid>
-        <Grid Row="2">
-            <Popup Name="ContactCreatePopup"
-                   Placement="Center"
-                   PlacementTarget="{Binding $parent[UserControl]}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   IsOpen="{Binding IsPopupOpen}"
-                   WindowManagerAddShadowHint="False">
-                <Panel>
-                    <!-- 弹窗内容 -->
-                    <Border Classes="Popup">
-                        <StackPanel Classes="Popup">
-                            <TextBlock Text="{Binding ErrorMessage}"
-                                       IsVisible="{Binding HasErrors}"
-                                       Classes="ShowError" />
-
-                            <StackPanel>
-                                <Label Content="名称" Target="Name" />
-                                <TextBox Name="Name"
-                                         Text="{Binding ContactData.Name}" />
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="邮箱" Target="Email" />
-                                <TextBox Name="Email"
-                                         Text="{Binding ContactData.Email}" />
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="电话" Target="Phone" />
-                                <TextBox Name="Phone"
-                                         Text="{Binding ContactData.Phone}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="0">
-                                <Label Content="微信" Target="Wechat" />
-                                <TextBox Name="Wechat"
-                                         Text="{Binding ContactData.Wechat}" />
-                            </StackPanel>
-                            <StackPanel>
-                                <ft:FilterTagView DataContext="{Binding Ftvm}"></ft:FilterTagView>
-                            </StackPanel>
-                            <UniformGrid Rows="1" Columns="2" Margin="0,16,0,0">
-                                <Button Classes="Cancel"
-                                        Command="{Binding PopupCloseCommand}"
-                                        Content="取消" />
-                                <Button Classes="Update"
-                                        HorizontalAlignment="Right"
-                                        Command="{Binding ContactSubmitCommand }"
-                                        CommandParameter="{Binding .}"
-                                        Content="提交" />
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-                </Panel>
-            </Popup>
         </Grid>
     </Grid>
 </UserControl>

@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MMRMobile.Components.ContactPop"
+             xmlns:ft="clr-namespace:MMRMobile.Components.FilterTag"
+             x:DataType="vm:ContactPopViewModel"
+             x:Class="MMRMobile.Components.ContactPop.ContactPopView">
+    <!-- 弹窗内容 -->
+    <Border Classes="Popup">
+        <StackPanel Classes="Popup">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       IsVisible="{Binding HasErrors}"
+                       Classes="ShowError" />
+
+            <StackPanel>
+                <Label Content="名称" Target="Name" />
+                <TextBox Name="Name"
+                         Text="{Binding ContactData.Name}" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="邮箱" Target="Email" />
+                <TextBox Name="Email"
+                         Text="{Binding ContactData.Email}" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="电话" Target="Phone" />
+                <TextBox Name="Phone"
+                         Text="{Binding ContactData.Phone}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="0">
+                <Label Content="微信" Target="Wechat" />
+                <TextBox Name="Wechat"
+                         Text="{Binding ContactData.Wechat}" />
+            </StackPanel>
+            <StackPanel>
+                <ft:FilterTagView DataContext="{Binding Ftvm}"></ft:FilterTagView>
+            </StackPanel>
+            <StackPanel>
+                <Button Classes="Update"
+                        HorizontalAlignment="Right"
+                        Command="{Binding ContactSubmitCommand }"
+                        CommandParameter="{Binding .}">
+                    <StackPanel>
+                        <TextBlock Text="提交"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

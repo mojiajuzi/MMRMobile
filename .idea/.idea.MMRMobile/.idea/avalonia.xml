@@ -7,6 +7,7 @@
         <entry key="MMRMobile/Assets/Styles.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Assets/styles/Nord.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Assets/styles/Styles.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
+        <entry key="MMRMobile/Components/ContactPop/ContactPopView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Components/Dock/Dock.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Components/Dock/DockView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
         <entry key="MMRMobile/Components/FilterTag/FilterTagView.axaml" value="MMRMobile.Browser/MMRMobile.Browser.csproj" />
