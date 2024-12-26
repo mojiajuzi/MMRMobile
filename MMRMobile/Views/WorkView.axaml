@@ -10,19 +10,25 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MMRMobile.Views.WorkView">
     <Grid RowDefinitions="Auto,*,Auto">
-        <Grid Row="0">
-            <Grid ColumnDefinitions="80*,20*" VerticalAlignment="Center">
-                <Grid Column="0">
-                    <TextBox Classes="Search" Text="{Binding SearchText}"></TextBox>
-                </Grid>
-                <Grid Column="1">
-                    <Button Classes="Action" Command="{Binding OpenPopupCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#x2b;"></TextBlock>
-                            <TextBlock Text="新增"></TextBlock>
-                        </StackPanel>
-                    </Button>
-                </Grid>
+        <Grid Grid.Row="0" Classes="SearchContainer">
+            <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                <TextBox Grid.Column="0"
+                        Classes="Search"
+                        Text="{Binding SearchText}">
+                    <TextBox.InnerLeftContent>
+                        <TextBlock Name="PART_SearchIcon"/>
+                    </TextBox.InnerLeftContent>
+                </TextBox>
+                
+                <Button Grid.Column="1"
+                        Classes="Action"
+                        Command="{Binding OpenPopupCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xf067;"
+                                 FontFamily="{StaticResource FontAwesome}"/>
+                        <TextBlock Text="新增项目"/>
+                    </StackPanel>
+                </Button>
             </Grid>
         </Grid>
         <Grid Row="1">
@@ -30,66 +36,57 @@
                 <ItemsControl.DataTemplates>
                     <DataTemplate x:DataType="{x:Type model:WorkModel}">
                         <Border Classes="Card">
-                            <StackPanel Classes="Card" Spacing="8">
+                            <StackPanel Classes="Card">
                                 <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
                                     <TextBlock Grid.Column="0"
-                                               Text="{Binding Name}"
-                                               Classes="h2"
-                                               VerticalAlignment="Center" />
+                                             Text="{Binding Name}"
+                                             Classes="h2"/>
                                     <Border Grid.Column="1"
-                                            Classes="Status"
-                                            Padding="6,2">
-                                        <TextBlock Text="{Binding Status}" />
+                                            Classes="Status">
+                                        <TextBlock Text="{Binding Status}"/>
                                     </Border>
                                 </Grid>
-                                <Grid ColumnDefinitions="*,*,*" Margin="0,4">
-                                    <StackPanel Grid.Column="0" Spacing="2">
+                                <Grid ColumnDefinitions="*,*,*">
+                                    <StackPanel Grid.Column="0" Spacing="4">
                                         <TextBlock Text="预算"
-                                                   Classes="Caption" />
+                                                 Classes="Caption"/>
                                         <TextBlock Text="{Binding Funds, StringFormat='￥{0:N2}'}"
-                                                   Classes="Body" />
+                                                 Classes="Body"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="1" Spacing="2">
+                                    
+                                    <StackPanel Grid.Column="1" Spacing="4">
                                         <TextBlock Text="收入"
-                                                   Classes="Caption" />
+                                                 Classes="Caption"/>
                                         <TextBlock Text="{Binding TotalIncome, StringFormat='￥{0:N2}'}"
-                                                   Foreground="{StaticResource SuccessGreen}"
-                                                   Classes="Body" />
+                                                 Classes="Body"
+                                                 Foreground="{StaticResource Nord14}"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="2" Spacing="2">
+                                    
+                                    <StackPanel Grid.Column="2" Spacing="4">
                                         <TextBlock Text="支出"
-                                                   Classes="Caption" />
+                                                 Classes="Caption"/>
                                         <TextBlock Text="{Binding TotalExpense, StringFormat='￥{0:N2}'}"
-                                                   Foreground="{StaticResource ErrorRed}"
-                                                   Classes="Body" />
+                                                 Classes="Body"
+                                                 Foreground="{StaticResource Nord11}"/>
                                     </StackPanel>
                                 </Grid>
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="8"
-                                            HorizontalAlignment="Right">
+                                <StackPanel Classes="Actions">
                                     <Button Classes="Action Info"
                                             Command="{Binding #WorksControl.((vm:WorkViewModel)DataContext).OpenDetailsCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <TextBlock Classes="Icon" Text="&#xf06e;" />
-                                            <TextBlock Text="查看" />
-                                        </StackPanel>
+                                        <TextBlock Text="查看"/>
                                     </Button>
+                                    
                                     <Button Classes="Action Update"
                                             Command="{Binding #WorksControl.((vm:WorkViewModel)DataContext).WorkUpdateCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <TextBlock Classes="Icon" Text="&#xf044;" />
-                                            <TextBlock Text="编辑" />
-                                        </StackPanel>
+                                        <TextBlock Text="编辑"/>
                                     </Button>
+                                    
                                     <Button Classes="Action Delete"
                                             Command="{Binding #WorksControl.((vm:WorkViewModel)DataContext).WorkDeleteCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <TextBlock Classes="Icon" Text="&#xf1f8;" />
-                                            <TextBlock Text="删除" />
-                                        </StackPanel>
+                                        <TextBlock Text="删除"/>
                                     </Button>
                                 </StackPanel>
                             </StackPanel>

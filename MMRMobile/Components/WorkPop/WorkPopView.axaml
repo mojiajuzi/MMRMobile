@@ -9,59 +9,55 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:WorkPopViewModel"
              x:Class="MMRMobile.Components.WorkPop.WorkPopView">
-    <Border>
-        <Grid RowDefinitions="Auto,*">
-            <Grid Row="0">
-                <Button Content="返回" Command="{Binding BackCommand}"></Button>
-            </Grid>
-            <Grid Row="1">
-                <StackPanel HorizontalAlignment="Center" Spacing="8">
-                    <TextBlock Classes="ShowError"
-                               IsVisible="{Binding HasErrors}"
-                               Text="{Binding ErrorMessage}" />
-                    <TextBlock Text="名称"></TextBlock>
-                    <TextBox Name="Name" Text="{Binding WorkData.Name}"></TextBox>
-                    <TextBlock Text="说明"></TextBlock>
-                    <TextBox Name="Description"
-                             Text="{Binding WorkData.Description}"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap">
-                    </TextBox>
-                    <TextBlock Text="项目金额"></TextBlock>
-                    <TextBox Name="Funds"
-                             Text="{Binding WorkData.Funds}">
-                    </TextBox>
-                    <StackPanel>
-                        <TextBlock Text="开始时间"></TextBlock>
-                        <DatePicker
-                            DayFormat="ddd dd"
-                            SelectedDate="{Binding SelectedStartAt}">
-                        </DatePicker>
-                    </StackPanel>
-                    <StackPanel>
-                        <TextBlock Text="结束时间"></TextBlock>
-                        <DatePicker
-                            DayFormat="ddd dd"
-                            SelectedDate="{Binding SelectedEndAt}">
-                        </DatePicker>
-                    </StackPanel>
-                    <StackPanel>
-                        <e:WorkStatusView DataContext="{Binding WorkStatusView}"></e:WorkStatusView>
-                    </StackPanel>
-                    <StackPanel>
-                        <t:FilterTagView DataContext="{Binding FilterTagView}"></t:FilterTagView>
-                    </StackPanel>
-                    <UniformGrid Rows="1">
-                        <Button
-                            Classes="Update"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding WorkSubmitCommand}"
-                            Content="提交" />
-                    </UniformGrid>
-                </StackPanel>
-            </Grid>
-        </Grid>
 
+    <Border Classes="NordPopup">
+        <StackPanel>
+            <!-- 返回按钮 -->
+            <Button Classes="NordBack"
+                    Command="{Binding BackCommand}">
+                <PathIcon Data="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+            </Button>
+
+            <StackPanel Spacing="5">
+                <!-- 错误信息 -->
+                <TextBlock Text="{Binding ErrorMessage}"
+                           IsVisible="{Binding HasErrors}"
+                           Classes="NordError" />
+
+                <!-- 名称 -->
+                <TextBlock Text="名称" Classes="FormLabel" />
+                <TextBox Text="{Binding WorkData.Name}" />
+                <!-- 项目金额 -->
+                <TextBlock Text="项目金额" Classes="FormLabel" />
+                <TextBox Text="{Binding WorkData.Funds}" />
+
+                <!-- 开始时间 -->
+                <TextBlock Text="开始时间" Classes="FormLabel" />
+                <DatePicker DayFormat="ddd dd"
+                            SelectedDate="{Binding SelectedStartAt}" />
+
+                <!-- 结束时间 -->
+                <TextBlock Text="结束时间" Classes="FormLabel" />
+                <DatePicker DayFormat="ddd dd"
+                            SelectedDate="{Binding SelectedEndAt}" />
+
+                <!-- 项目状态 -->
+                <TextBlock Text="项目状态" Classes="FormLabel" />
+                <e:WorkStatusView DataContext="{Binding WorkStatusView}" />
+
+                <!-- 标签 -->
+                <TextBlock Text="标签" Classes="FormLabel" />
+                <t:FilterTagView DataContext="{Binding FilterTagView}" />
+                <!-- 说明 -->
+                <TextBlock Text="说明" Classes="FormLabel" />
+                <TextBox Classes="Multiline"
+                         Text="{Binding WorkData.Description}" />
+                <!-- 提交按钮 -->
+                <Button Classes="NordSubmit"
+                        Command="{Binding WorkSubmitCommand}">
+                    <TextBlock Text="提交" />
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Border>
 </UserControl>
