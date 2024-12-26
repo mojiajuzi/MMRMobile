@@ -59,7 +59,7 @@ public partial class ContactViewModel : ViewModelBase
     [RelayCommand]
     private void OpenPopup()
     {
-        _navigationService.NavigateTo<ContactPopViewModel>();
+        _navigationService?.NavigateTo<ContactPopViewModel>(null, false);
     }
 
 
@@ -72,7 +72,7 @@ public partial class ContactViewModel : ViewModelBase
     private void ShowPopupToUpdate(ContactModel contact)
     {
         if (contact == null) return;
-        _navigationService.NavigateTo<ContactPopViewModel>(contact);
+        _navigationService.NavigateTo<ContactPopViewModel>(contact, false);
     }
 
     [RelayCommand]

@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:MMRMobile.ViewModels"
              xmlns:views="clr-namespace:MMRMobile.Views"
              xmlns:dock="clr-namespace:MMRMobile.Components.Dock"
+             xmlns:contactPop="clr-namespace:MMRMobile.Components.ContactPop"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MMRMobile.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -19,15 +20,22 @@
             <ContentControl Content="{Binding CurrentView}">
                 <ContentControl.DataTemplates>
                     <DataTemplate DataType="{x:Type vm:TagViewModel}">
-                        <views:TagView></views:TagView>
+                        <views:TagView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ContactViewModel}">
+                        <views:ContactView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:WorkViewModel}">
+                        <views:WorkView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type contactPop:ContactPopViewModel}">
+                        <contactPop:ContactPopView />
                     </DataTemplate>
                 </ContentControl.DataTemplates>
             </ContentControl>
         </Grid>
-        <Grid Grid.Row="1">
-            <Border Classes="DockBox">
-                <dock:DockView></dock:DockView>
-            </Border>
-        </Grid>
+        <Border Grid.Row="1" Classes="DockBox" IsVisible="{Binding ShowDock}">
+            <dock:DockView />
+        </Border>
     </Grid>
 </UserControl>

@@ -22,7 +22,7 @@ public partial class MainViewModel : ViewModelBase
         _navigationService = navigationService;
         _navigationService.OnNavigated += NavigationService_OnNavigated;
 
-        // 设置初始视图为TagView
+        // 设置初始视图
         _navigationService.NavigateTo<ContactViewModel>();
     }
 

@@ -18,7 +18,7 @@ public class NavigationService : INavigationService
         _serviceProvider = serviceProvider;
     }
 
-    public void NavigateTo<T>(object parameter = null) where T : ViewModelBase
+    public void NavigateTo<T>(object parameter = null, bool showDock = true) where T : ViewModelBase
     {
         var viewModel = _serviceProvider.GetRequiredService<T>();
 
@@ -29,9 +29,6 @@ public class NavigationService : INavigationService
         }
 
         _currentViewModel = viewModel;
-
-        // 某些视图不显示DockView（如详情页）
-        bool showDock = typeof(T) != typeof(WorkDetailViewModel);
 
         // 如果视图需要参数初始化
         if (viewModel is INavigationAware navigationAware)
@@ -48,7 +45,7 @@ public class NavigationService : INavigationService
         {
             var previousViewModel = _navigationStack.Pop();
             _currentViewModel = previousViewModel;
-            
+
             if (previousViewModel is INavigationAware navigationAware)
             {
                 navigationAware.OnNavigatedTo(null);
