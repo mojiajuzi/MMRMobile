@@ -14,7 +14,7 @@ namespace MMRMobile.ViewModels;
 
 using CommunityToolkit.Mvvm.Input;
 
-public partial class ContactViewModel : ViewModelBase
+public partial class ContactViewModel : ViewModelBase, INavigationAware
 {
     [ObservableProperty] private string? _searchText;
     [ObservableProperty] private ObservableCollection<ContactModel> _contacts;
@@ -24,19 +24,27 @@ public partial class ContactViewModel : ViewModelBase
     public ContactViewModel(AppDbContext dbContext, INavigationService navigationService)
     {
         _dbContext = dbContext;
-        GetContacts();
         _navigationService = navigationService;
+        Contacts = new ObservableCollection<ContactModel>();
+    }
+
+    public void OnNavigatedTo(object? parameter)
+    {
+        // 每次导航到此页面时刷新数据
+        GetContacts();
     }
 
     private void GetContacts()
     {
-        var c = _dbContext.Contacts.AsNoTracking()
+        var contacts = _dbContext.Contacts.AsNoTracking()
             .Include(t => t.ContactTags)
             .ThenInclude(model => model.Tag)
             .ToList();
-        if (c.Count != 0)
+        
+        Contacts.Clear();
+        foreach (var contact in contacts)
         {
-            Contacts = new ObservableCollection<ContactModel>(c);
+            Contacts.Add(contact);
         }
     }
 
@@ -44,11 +52,17 @@ public partial class ContactViewModel : ViewModelBase
     {
         if (!string.IsNullOrEmpty(value))
         {
-            SearchText = value;
-            var contactList = _dbContext.Contacts.AsNoTracking().Include(t => t.ContactTags)
+            var contactList = _dbContext.Contacts.AsNoTracking()
+                .Include(t => t.ContactTags)
                 .ThenInclude(model => model.Tag)
-                .Where(c => c.Name.Contains(value)).ToList();
-            Contacts = new ObservableCollection<ContactModel>(contactList);
+                .Where(c => c.Name.Contains(value))
+                .ToList();
+
+            Contacts.Clear();
+            foreach (var contact in contactList)
+            {
+                Contacts.Add(contact);
+            }
         }
         else
         {
@@ -61,7 +75,6 @@ public partial class ContactViewModel : ViewModelBase
     {
         _navigationService?.NavigateTo<ContactPopViewModel>(null, false);
     }
-
 
     [RelayCommand]
     private void ShowContactWork()
