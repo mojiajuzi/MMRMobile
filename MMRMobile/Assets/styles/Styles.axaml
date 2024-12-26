@@ -472,4 +472,19 @@
     <Style Selector="NumericUpDown:pointerover">
         <Setter Property="BorderBrush" Value="{StaticResource Nord10}"/>
     </Style>
+
+    <!-- 弹窗遮罩样式 -->
+    <Style Selector="Border.NordOverlay">
+        <Setter Property="Background" Value="#4C000000"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- 弹窗容器样式 -->
+    <Style Selector="Popup">
+        <Setter Property="PlacementMode" Value="AnchorAndGravity"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
 </Styles>

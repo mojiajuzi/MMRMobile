@@ -5,5 +5,6 @@
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <ActiveDebugProfile>Pixel 7 - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
     <DefaultDevice>pixel_7_-_api_34</DefaultDevice>
+    <_LastSelectedProfileId>D:\code\blazor\MMRMobile\MMRMobile.Android\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
 </Project>

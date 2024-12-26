@@ -56,6 +56,12 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            DbInitializer.Initialize(dbContext);
+        }
+
         var dataValidationPluginsToRemove =
             BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
@@ -72,7 +78,7 @@ public class App : Application
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                // 使用 DI ��建 MainViewModel
+                // 使用 DI 建 MainViewModel
                 var mainViewModel = _serviceProvider!.GetRequiredService<MainViewModel>();
                 desktop.MainWindow = new MainWindow
                 {
@@ -91,8 +97,6 @@ public class App : Application
             }
         }
 
-        var dbContext = _serviceProvider?.GetRequiredService<AppDbContext>();
-        dbContext.Database.EnsureCreated();
         base.OnFrameworkInitializationCompleted();
     }
 

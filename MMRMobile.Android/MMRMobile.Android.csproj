@@ -19,9 +19,11 @@
         <RunAOTCompilation>False</RunAOTCompilation>
         <PublishTrimmed>False</PublishTrimmed>
         <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+        <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+        <RunAOTCompilation>False</RunAOTCompilation>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,21 +33,21 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Android"/>
+        <PackageReference Include="Avalonia.Android" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
-        <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MMRMobile\MMRMobile.csproj"/>
+        <ProjectReference Include="..\MMRMobile\MMRMobile.csproj" />
     </ItemGroup>
 </Project>

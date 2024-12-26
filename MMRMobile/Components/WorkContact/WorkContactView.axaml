@@ -44,7 +44,7 @@
                                                  Classes="Body"
                                                  Foreground="{Binding IsCome, 
                                                           Converter={StaticResource BoolToColorConverter}, 
-                                                          ConverterParameter='{StaticResource Nord14},{StaticResource Nord11}'}"/>
+                                                          ConverterParameter='Nord14,Nord11'}"/>
                                     </StackPanel>
                                     
                                     <ToggleSwitch Grid.Column="1"
@@ -77,57 +77,72 @@
 
         <Grid Row="2">
             <Popup Name="ContactCreatePopup"
-                   Placement="Center"
-                   PlacementTarget="{Binding $parent[UserControl]}"
                    IsOpen="{Binding IsPopupOpen}">
-                <Border Classes="NordPopup">
-                    <StackPanel Classes="NordForm">
-                        <TextBlock Text="{Binding ErrorMessage}"
-                                 IsVisible="{Binding HasErrors}"
-                                 Classes="NordError"/>
+                <Panel>
+                    <!-- 遮罩层 -->
+                    <Border Classes="NordOverlay"
+                            IsVisible="{Binding IsPopupOpen}">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+                    
+                    <!-- 弹窗内容 -->
+                    <Border Classes="NordPopup"
+                            Background="{StaticResource Nord6}"
+                            BorderBrush="{StaticResource Nord4}"
+                            BorderThickness="1"
+                            Padding="20">
+                        <StackPanel Classes="NordForm">
+                            <TextBlock Text="{Binding ErrorMessage}"
+                                     IsVisible="{Binding HasErrors}"
+                                     Classes="NordError"/>
 
-                        <StackPanel>
-                            <TextBlock Text="联系人" Classes="FormLabel"/>
-                            <ComboBox ItemsSource="{Binding Contacts}"
-                                    SelectedItem="{Binding SelectedContact}"
-                                    HorizontalAlignment="Stretch">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate x:DataType="{x:Type model:ContactModel}">
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="联系人" Classes="FormLabel"/>
+                                <ComboBox ItemsSource="{Binding Contacts}"
+                                        SelectedItem="{Binding SelectedContact}"
+                                        HorizontalAlignment="Stretch">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="{x:Type model:ContactModel}">
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
 
-                        <StackPanel>
-                            <TextBlock Text="金额" Classes="FormLabel"/>
-                            <NumericUpDown Value="{Binding Amount}"
-                                         Minimum="0"
-                                         Maximum="999999999"
-                                         FormatString="C2"
-                                         HorizontalAlignment="Stretch"/>
-                        </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="金额" Classes="FormLabel"/>
+                                <NumericUpDown Value="{Binding Amount}"
+                                             Minimum="0"
+                                             Maximum="999999999"
+                                             FormatString="C2"
+                                             HorizontalAlignment="Stretch"/>
+                            </StackPanel>
 
-                        <StackPanel>
-                            <TextBlock Text="收付款" Classes="FormLabel"/>
-                            <ToggleSwitch IsChecked="{Binding IsCome}"
-                                        OnContent="收款"
-                                        OffContent="付款"/>
-                        </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="收付款" Classes="FormLabel"/>
+                                <ToggleSwitch IsChecked="{Binding IsCome}"
+                                            OnContent="收款"
+                                            OffContent="付款"/>
+                            </StackPanel>
 
-                        <StackPanel Classes="Actions">
-                            <Button Classes="Action Info"
-                                    Command="{Binding PopupCloseCommand}">
-                                <TextBlock Text="取消"/>
-                            </Button>
-                            
-                            <Button Classes="NordSubmit"
-                                    Command="{Binding SubmitCommand}">
-                                <TextBlock Text="提交"/>
-                            </Button>
+                            <StackPanel Classes="Actions">
+                                <Button Classes="Action Info"
+                                        Command="{Binding PopupCloseCommand}">
+                                    <TextBlock Text="取消"/>
+                                </Button>
+                                
+                                <Button Classes="NordSubmit"
+                                        Command="{Binding SubmitCommand}">
+                                    <TextBlock Text="提交"/>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Border>
+                    </Border>
+                </Panel>
             </Popup>
         </Grid>
     </Grid>
