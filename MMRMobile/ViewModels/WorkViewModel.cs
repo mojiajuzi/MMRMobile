@@ -32,7 +32,8 @@ public partial class WorkViewModel : ViewModelBase
 
     private void GetWorks()
     {
-        var w = _dbContext.Works.AsNoTracking().Include(wt => wt.WorkTags).ThenInclude(wt => wt.Tag).Include(w => w.WorkPayments).ToList();
+        var w = _dbContext.Works.AsNoTracking().Include(wt => wt.WorkTags).ThenInclude(wt => wt.Tag)
+            .Include(w => w.WorkPayments).ToList();
         if (w.Count != 0)
         {
             Works = new ObservableCollection<WorkModel>(w);
@@ -49,13 +50,13 @@ public partial class WorkViewModel : ViewModelBase
     [RelayCommand]
     private void OpenDetails(WorkModel work)
     {
-        _navigationService.NavigateTo<WorkDetailViewModel>(work);
+        _navigationService.NavigateTo<WorkDetailViewModel>(work, false);
     }
 
     [RelayCommand]
     private void WorkUpdate(WorkModel workModel)
     {
-        _navigationService.NavigateTo<WorkPopViewModel>(workModel);
+        _navigationService.NavigateTo<WorkPopViewModel>(workModel, false);
     }
 
     [RelayCommand]

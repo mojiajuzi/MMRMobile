@@ -2,6 +2,8 @@ using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
+using Avalonia;
+using Avalonia.Styling;
 
 namespace MMRMobile.Converters;
 
@@ -14,8 +16,11 @@ public class BoolToColorConverter : IValueConverter
             var colorParts = colors.Split(',');
             if (colorParts.Length == 2)
             {
-                var color = isTrue ? colorParts[0] : colorParts[1];
-                return SolidColorBrush.Parse(color);
+                var resourceKey = isTrue ? colorParts[0].Trim() : colorParts[1].Trim();
+                if (Application.Current?.Resources.TryGetResource(resourceKey, null, out var resource) == true)
+                {
+                    return resource as IBrush ?? new SolidColorBrush(Colors.Black);
+                }
             }
         }
         return new SolidColorBrush(Colors.Black);

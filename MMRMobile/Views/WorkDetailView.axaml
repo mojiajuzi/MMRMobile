@@ -8,121 +8,138 @@
              x:DataType="vm:WorkDetailViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MMRMobile.Views.WorkDetailView">
-    <TabControl Margin="5">
+
+    <TabControl>
         <TabItem Header="详情">
-            <StackPanel Margin="16" Spacing="16">
+            <StackPanel Classes="DetailContainer">
                 <!-- 标题和状态 -->
                 <Grid ColumnDefinitions="*,Auto">
-                    <TextBlock Grid.Column="0" 
-                             Text="{Binding Work.Name}"
-                             Classes="h1" />
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Work.Name}"
+                               Classes="h1" />
                     <Border Grid.Column="1"
-                            Classes="Status"
-                            Padding="8,4">
+                            Classes="Status">
                         <TextBlock Text="{Binding Work.Status}" />
                     </Border>
                 </Grid>
 
-                <!-- 时间信息 -->
-                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Margin="0,8">
-                    <StackPanel Grid.Column="0" Grid.Row="0" Spacing="4">
-                        <TextBlock Text="开始时间" Classes="Caption" />
-                        <TextBlock Text="{Binding Work.StartAt, StringFormat='{}{0:yyyy-MM-dd}'}"
-                                 Classes="Body" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="0" Spacing="4">
-                        <TextBlock Text="结束时间" Classes="Caption" />
-                        <TextBlock Text="{Binding Work.EndAt, StringFormat='{}{0:yyyy-MM-dd}'}"
-                                 Classes="Body" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="1" Spacing="4" Margin="0,16,0,0">
-                        <TextBlock Text="创建时间" Classes="Caption" />
-                        <TextBlock Text="{Binding Work.DateCreated, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                                 Classes="Body" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" Spacing="4" Margin="0,16,0,0">
-                        <TextBlock Text="最后修改" Classes="Caption" />
-                        <TextBlock Text="{Binding Work.DateModified, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                                 Classes="Body" />
-                    </StackPanel>
-                </Grid>
+                <!-- 时间信息卡片 -->
+                <Border Classes="InfoCard">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="时间信息" Classes="h3" />
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Column="0" Grid.Row="0" Spacing="4">
+                                <TextBlock Text="开始时间" Classes="Caption" />
+                                <TextBlock Text="{Binding Work.StartAt, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                         Classes="Body" />
+                            </StackPanel>
 
-                <!-- 费用信息 -->
-                <StackPanel Spacing="4">
-                    <TextBlock Text="预算费用" Classes="Caption" />
-                    <TextBlock Text="{Binding Work.Funds, StringFormat='￥{0:N2}'}"
-                             Classes="h2" />
-                    
-                    <!-- 添加收支总额显示 -->
-                    <Grid ColumnDefinitions="*,*" Margin="0,8">
-                        <StackPanel Grid.Column="0" Spacing="4">
-                            <TextBlock Text="收入总额" Classes="Caption" />
-                            <TextBlock Text="{Binding Work.TotalIncome, StringFormat='￥{0:N2}'}"
-                                     Foreground="{StaticResource SuccessGreen}"
-                                     Classes="h3" />
+                            <StackPanel Grid.Column="1" Grid.Row="0" Spacing="4">
+                                <TextBlock Text="结束时间" Classes="Caption" />
+                                <TextBlock Text="{Binding Work.EndAt, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                         Classes="Body" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Spacing="4" Margin="0 16 0 0">
+                                <TextBlock Text="创建时间" Classes="Caption" />
+                                <TextBlock Text="{Binding Work.DateCreated, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                                         Classes="Body" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1" Spacing="4" Margin="0 16 0 0">
+                                <TextBlock Text="最后修改" Classes="Caption" />
+                                <TextBlock Text="{Binding Work.DateModified, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                                         Classes="Body" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 费用信息卡片 -->
+                <Border Classes="InfoCard">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="费用信息" Classes="h3" />
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="预算费用" Classes="Caption" />
+                            <TextBlock Text="{Binding Work.Funds, StringFormat='￥{0:N2}'}"
+                                     Classes="h2" />
+
+                            <Grid ColumnDefinitions="*,*,*">
+                                <StackPanel Grid.Column="0" Spacing="4">
+                                    <TextBlock Text="收入总额" Classes="Caption" />
+                                    <TextBlock Text="{Binding Work.TotalIncome, StringFormat='￥{0:N2}'}"
+                                             Classes="h3"
+                                             Foreground="{StaticResource Nord14}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Spacing="4">
+                                    <TextBlock Text="支出总额" Classes="Caption" />
+                                    <TextBlock Text="{Binding Work.TotalExpense, StringFormat='￥{0:N2}'}"
+                                             Classes="h3"
+                                             Foreground="{StaticResource Nord11}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Spacing="4">
+                                    <TextBlock Text="当前余额" Classes="Caption" />
+                                    <TextBlock Text="{Binding Work.Balance, StringFormat='￥{0:N2}'}"
+                                             Classes="h2"
+                                             Foreground="{Binding Work.Balance, 
+                                                      Converter={StaticResource BoolToColorConverter}, 
+                                                      ConverterParameter='Nord14,Nord11'}" />
+                                </StackPanel>
+                            </Grid>
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Spacing="4">
-                            <TextBlock Text="支出总额" Classes="Caption" />
-                            <TextBlock Text="{Binding Work.TotalExpense, StringFormat='￥{0:N2}'}"
-                                     Foreground="{StaticResource ErrorRed}"
-                                     Classes="h3" />
-                        </StackPanel>
-                    </Grid>
-                    
-                    <!-- 添加余额显示 -->
-                    <StackPanel Spacing="4" Margin="0,8,0,0">
-                        <TextBlock Text="当前余额" Classes="Caption" />
-                        <TextBlock Text="{Binding Work.Balance, StringFormat='￥{0:N2}'}"
-                                 Classes="h2"
-                                 Foreground="{Binding Work.Balance, 
-                                            Converter={StaticResource BoolToColorConverter}, 
-                                            ConverterParameter='Green,Red'}" />
                     </StackPanel>
-                </StackPanel>
+                </Border>
 
-                <!-- 项目描述 -->
-                <StackPanel Spacing="4">
-                    <TextBlock Text="项目描述" Classes="Caption" />
-                    <TextBlock Text="{Binding Work.Description}"
-                             TextWrapping="Wrap"
-                             Classes="Body" />
-                </StackPanel>
+                <!-- 项目信息卡片 -->
+                <Border Classes="InfoCard">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="项目信息" Classes="h3" />
+                        
+                        <!-- 项目描述 -->
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="项目描述" Classes="Caption" />
+                            <TextBlock Text="{Binding Work.Description}"
+                                     TextWrapping="Wrap"
+                                     Classes="Body" />
+                        </StackPanel>
 
-                <!-- 标签列表 -->
-                <StackPanel Spacing="4">
-                    <TextBlock Text="标签" Classes="Caption" />
-                    <ItemsControl ItemsSource="{Binding Work.WorkTags}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Classes="Tag" Margin="0,0,8,8">
-                                    <TextBlock Text="{Binding Tag.Name}" />
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                        <!-- 标签列表 -->
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="标签" Classes="Caption" />
+                            <ItemsControl ItemsSource="{Binding Work.WorkTags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Classes="Tag">
+                                            <TextBlock Text="{Binding Tag.Name}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
 
                 <!-- 返回按钮 -->
-                <Button Classes="Action"
-                        Command="{Binding NavigateBackCommand}"
-                        HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock Classes="Icon" Text="&#xf060;" />
-                        <TextBlock Text="返回" />
-                    </StackPanel>
+                <Button Classes="NordBack"
+                        Command="{Binding NavigateBackCommand}">
+                    <PathIcon Data="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
                 </Button>
             </StackPanel>
         </TabItem>
+
         <TabItem Header="参与者">
-            <wt:WorkContactView DataContext="{Binding WorkContactViewModel}"></wt:WorkContactView>
+            <wt:WorkContactView DataContext="{Binding WorkContactViewModel}" />
         </TabItem>
+
         <TabItem Header="收支">
-            <wp:WorkPaymentView DataContext="{Binding WorkPaymentViewModel}"></wp:WorkPaymentView>
+            <wp:WorkPaymentView DataContext="{Binding WorkPaymentViewModel}" />
         </TabItem>
     </TabControl>
 </UserControl>
