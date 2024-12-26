@@ -8,19 +8,25 @@
              x:Class="MMRMobile.Views.ContactView"
              x:DataType="vm:ContactViewModel">
     <Grid RowDefinitions="Auto,*">
-        <Grid Grid.Row="0">
-            <Grid ColumnDefinitions="80*,20*" VerticalAlignment="Center">
-                <Grid Column="0">
-                    <TextBox Classes="Search" Text="{Binding SearchText}"></TextBox>
-                </Grid>
-                <Grid Column="1">
-                    <Button Classes="Action" Command="{Binding OpenPopupCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#x2b;"></TextBlock>
-                            <TextBlock Text="新增"></TextBlock>
-                        </StackPanel>
-                    </Button>
-                </Grid>
+        <Grid Grid.Row="0" Classes="SearchContainer">
+            <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                <TextBox Grid.Column="0"
+                        Classes="Search"
+                        Text="{Binding SearchText}">
+                    <TextBox.InnerLeftContent>
+                        <TextBlock Name="PART_SearchIcon" />
+                    </TextBox.InnerLeftContent>
+                </TextBox>
+                
+                <Button Grid.Column="1"
+                        Classes="Action"
+                        Command="{Binding OpenPopupCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xf067;"
+                                 FontFamily="{StaticResource FontAwesome}" />
+                        <TextBlock Text="新增联系人" />
+                    </StackPanel>
+                </Button>
             </Grid>
         </Grid>
         <Grid Row="1">
@@ -37,50 +43,42 @@
                                     <TextBlock Classes="Icon" Text="&#xf095;"></TextBlock>
                                     <TextBlock Text="{Binding Phone}"></TextBlock>
                                 </StackPanel>
-                                <StackPanel Classes="Icon" VerticalAlignment="Center">
-                                    <TextBlock Classes="Icon" Text="&#xf0e0;" TextAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Email}" TextAlignment="Center"></TextBlock>
+                                <StackPanel Classes="Icon">
+                                    <TextBlock Classes="Icon" Text="&#xf0e0;"></TextBlock>
+                                    <TextBlock Text="{Binding Email}"></TextBlock>
                                 </StackPanel>
                                 <!-- tags start-->
-                                <ItemsControl ItemsSource="{Binding ContactTags}" Padding="0,10">
+                                <ItemsControl ItemsSource="{Binding ContactTags}" Margin="0 8 0 0">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"
-                                                       HorizontalAlignment="Left"
-                                                       MaxWidth="200" />
+                                            <WrapPanel Classes="TagList"/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="{x:Type model:ContactTagModel}">
                                             <Border Classes="Tag">
-                                                <TextBlock Text="{Binding Tag.Name}" TextAlignment="Center" />
+                                                <TextBlock Text="{Binding Tag.Name}"></TextBlock>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                                 <!-- tags show end-->
                                 <!-- show action button-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <StackPanel Classes="Actions">
                                     <Button Classes="Action Info"
                                             Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowContactWorkCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="查看"></TextBlock>
-                                        </StackPanel>
+                                        <TextBlock Text="查看"></TextBlock>
                                     </Button>
                                     <Button Classes="Action Update"
                                             Command="{Binding #Root.((vm:ContactViewModel)DataContext).ShowPopupToUpdateCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="编辑"></TextBlock>
-                                        </StackPanel>
+                                        <TextBlock Text="编辑"></TextBlock>
                                     </Button>
                                     <Button Classes="Action Delete"
                                             Command="{Binding #Root.((vm:ContactViewModel)DataContext).RemoveContactCommand}"
                                             CommandParameter="{Binding .}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="删除"></TextBlock>
-                                        </StackPanel>
+                                        <TextBlock Text="删除"></TextBlock>
                                     </Button>
                                 </StackPanel>
                                 <!-- end action button-->

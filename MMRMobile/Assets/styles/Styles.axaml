@@ -1,125 +1,229 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <!-- Add Controls for Previewer Here -->
-        </Border>
-    </Design.PreviewWith>
 
-    <!-- Add Styles Here -->
+    <!-- 主容器样式 -->
+    <Style Selector="Grid.MainContainer">
+        <Setter Property="Background" Value="{StaticResource Nord6}" /> <!-- nord6 作为最亮的背景 -->
+    </Style>
+
+    <!-- 内容区域样式 -->
+    <Style Selector="ContentControl.MainContent">
+        <Setter Property="Margin" Value="16" />
+        <Setter Property="Background" Value="{StaticResource Nord6}" />
+    </Style>
+
+    <!-- Dock区域样式 -->
     <Style Selector="Border.DockBox">
-        <Setter Property="Margin" Value="40,20"></Setter>
-        <Setter Property="Padding" Value="10,8"></Setter>
-        <Setter Property="BoxShadow" Value="2 2 8 DarkGray"></Setter>
-        <Setter Property="CornerRadius" Value="20"></Setter>
+        <Setter Property="Background" Value="{StaticResource Nord6}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Nord4}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="Margin" Value="16 0 16 10" />
+        <Setter Property="Padding" Value="16 2" />
+        <Setter Property="BoxShadow" Value="2 2 16 0 #1a1a1a15" />
     </Style>
+
+    <!-- Dock容器样式 -->
     <Style Selector="StackPanel.DockContainer">
-        <Setter Property="Orientation" Value="Horizontal"></Setter>
-        <Setter Property="Spacing" Value="30"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-    </Style>
-    <Style Selector="Button.DockBtn">
-        <Setter Property="Background" Value="White"></Setter>
-    </Style>
-    <Style Selector="StackPanel.DockItem">
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Spacing" Value="5"></Setter>
-    </Style>
-    <Style Selector="StackPanel.DockItem > TextBlock">
-        <Setter Property="TextAlignment" Value="Center"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-    </Style>
-
-    <Style Selector="TextBlock.Icon">
-        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"></Setter>
-        <Setter Property="Margin" Value="0,0,8,0"></Setter>
-        <Setter Property="TextAlignment" Value="Center"></Setter>
-    </Style>
-
-    <Style Selector="TextBox.Search">
-        <Setter Property="Margin" Value="8,8"></Setter>
-        <Setter Property="CornerRadius" Value="30"></Setter>
-    </Style>
-
-    <Style Selector="Button.Action">
-        <Setter Property="Margin" Value=" 5 5"></Setter>
-        <Setter Property="FontSize" Value="12"></Setter>
-    </Style>
-
-    <Style Selector="Button.Cancel">
-        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
-    </Style>
-
-    <Style Selector="Button.Delete">
-        <Setter Property="Background" Value="{DynamicResource WarningBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
-    </Style>
-
-    <Style Selector="Button.Update">
-        <Setter Property="Background" Value="{DynamicResource SuccessBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
-    </Style>
-
-    <Style Selector="Button.Info">
-        <Setter Property="Background" Value="{DynamicResource InfoBrush}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"></Setter>
-    </Style>
-
-    <Style Selector="Button.Default">
-        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"></Setter>
-    </Style>
-
-    <Style Selector="Border.Popup">
-        <Setter Property="Width" Value="300"></Setter>
-        <Setter Property="Background" Value="White"></Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BoxShadow" Value="0 0 8 0 #66000000, 0 0 2 0 #33000000, 0 4 16 0 #1A000000" />
+        <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Spacing" Value="12" />
+    </Style>
+
+    <!-- Dock按钮样式 -->
+    <Style Selector="Button.DockBtn">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="12 4" />
+        <Setter Property="CornerRadius" Value="6" />
+    </Style>
+
+    <Style Selector="Button.DockBtn:pointerover">
+        <Setter Property="Background" Value="{StaticResource Nord5}" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style Selector="Button.DockBtn:pressed">
+        <Setter Property="Background" Value="{StaticResource Nord4}" />
+    </Style>
+
+    <!-- Dock项目容器样式 -->
+    <Style Selector="StackPanel.DockItem">
+        <Setter Property="Spacing" Value="4" />
+    </Style>
+
+    <!-- Dock图标样式 -->
+    <Style Selector="StackPanel.DockItem > TextBlock:nth-child(1)">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{StaticResource Nord2}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!-- Dock样式 -->
+    <Style Selector="StackPanel.DockItem > TextBlock:nth-child(2)">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource Nord2}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!-- 激活状态样式 -->
+    <Style Selector="StackPanel.DockItem[Name=Home].active > TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Nord10}" />
+    </Style>
+
+    <Style Selector="StackPanel.DockItem[Name=Work].active > TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Nord10}" />
+    </Style>
+
+    <Style Selector="StackPanel.DockItem[Name=Contact].active > TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Nord10}" />
+    </Style>
+
+    <Style Selector="StackPanel.DockItem[Name=Tag].active > TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Nord10}" />
+    </Style>
+
+    <!-- 搜索区域容器样式 -->
+    <Style Selector="Grid.SearchContainer">
+        <Setter Property="Margin" Value="0 0 0 16" />
+        <Setter Property="Background" Value="{StaticResource Nord6}" />
+    </Style>
+
+    <!-- 搜索框样式 -->
+    <Style Selector="TextBox.Search">
+        <Setter Property="Background" Value="{StaticResource Nord5}" />
+        <Setter Property="Foreground" Value="{StaticResource Nord2}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Nord4}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="12 8" />
+        <Setter Property="Margin" Value="0 0 16 0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="20" />
-        <Setter Property="Padding" Value="20, 5"></Setter>
-        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="Watermark" Value="搜索联系人..." />
     </Style>
 
-    <Style Selector="TextBlock.ShowError">
-        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"></Setter>
-        <Setter Property="TextWrapping" Value="Wrap"></Setter>
-        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    <Style Selector="TextBox.Search:focus">
+        <Setter Property="Background" Value="{StaticResource Nord6}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Nord10}" />
     </Style>
 
+    <!-- 新增按钮样式 -->
+    <Style Selector="Button.Action">
+        <Setter Property="Background" Value="{StaticResource Nord10}" />
+        <Setter Property="Foreground" Value="{StaticResource Nord6}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="16 6"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
 
+    <Style Selector="Button.Action:pointerover">
+        <Setter Property="Background" Value="{StaticResource Nord9}" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style Selector="Button.Action:pressed">
+        <Setter Property="Background" Value="{StaticResource Nord10}" />
+        <Setter Property="Opacity" Value="0.9" />
+    </Style>
+
+    <!-- 按钮内容样式 -->
+    <Style Selector="Button.Action > StackPanel">
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+
+    <Style Selector="Button.Action TextBlock">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- 卡片容器样式 -->
     <Style Selector="Border.Card">
-        <Setter Property="BorderThickness" Value="0"></Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"></Setter>
-        <Setter Property="Margin" Value="8,10"></Setter>
-        <Setter Property="Width" Value="400"></Setter>
-        <Setter Property="BoxShadow" Value="1 1 4 DarkGray"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Padding" Value="12"></Setter>
-        <Setter Property="CornerRadius" Value="8"></Setter>
+        <Setter Property="Background" Value="{StaticResource Nord6}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Nord4}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Margin" Value="0 0 0 16"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="BoxShadow" Value="0 2 8 0 #1a1a1a15"/>
     </Style>
 
+    <!-- 卡片内容容器样式 -->
     <Style Selector="StackPanel.Card">
-        <Setter Property="Orientation" Value="Vertical"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Spacing" Value="4"></Setter>
-    </Style>
-    <Style Selector="Border.Tag">
-        <Setter Property="Height" Value="20"></Setter>
-        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"></Setter>
-        <Setter Property="CornerRadius" Value="8"></Setter>
-        <Setter Property="Margin" Value="0,0,4,0"></Setter>
-        <Setter Property="Padding" Value="10,0"></Setter>
+        <Setter Property="Spacing" Value="12"/>
     </Style>
 
+    <!-- 图标行样式 -->
     <Style Selector="StackPanel.Icon">
-        <Setter Property="Orientation" Value="Horizontal"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Spacing" Value="12"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
 
+    <!-- 图标样式 -->
+    <Style Selector="TextBlock.Icon">
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
+        <Setter Property="Foreground" Value="{StaticResource Nord10}"/>
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- 标签容器样式 -->
+    <Style Selector="Border.Tag">
+        <Setter Property="Background" Value="{StaticResource Nord7}"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Padding" Value="8 4"/>
+        <Setter Property="Margin" Value="0 0 8 8"/>
+    </Style>
+
+    <!-- 标签文本样式 -->
+    <Style Selector="Border.Tag > TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Nord6}"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <!-- 操作按钮样式 -->
+    <Style Selector="Button.Action.Info">
+        <Setter Property="Background" Value="{StaticResource Nord8}"/>
+        <Setter Property="Margin" Value="0 0 8 0"/>
+    </Style>
+
+    <Style Selector="Button.Action.Update">
+        <Setter Property="Background" Value="{StaticResource Nord7}"/>
+        <Setter Property="Margin" Value="0 0 8 0"/>
+    </Style>
+
+    <Style Selector="Button.Action.Delete">
+        <Setter Property="Background" Value="{StaticResource Nord11}"/>
+    </Style>
+
+    <!-- 卡片内容区域样式 -->
+    <Style Selector="ItemsControl">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <!-- 标签列表样式 -->
+    <Style Selector="WrapPanel.TagList">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+    <!-- 操作按钮容器样式 -->
+    <Style Selector="StackPanel.Actions">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 12 0 0"/>
+        <Setter Property="Spacing" Value="8"/>
+    </Style>
+
+    <!-- 搜索图标样式 -->
+    <Style Selector="TextBox.Search /template/ TextBlock#PART_SearchIcon">
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+        <Setter Property="Text" Value="&#xf002;" />
+        <Setter Property="Foreground" Value="{StaticResource Nord3}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="12 0" />
+    </Style>
 </Styles>

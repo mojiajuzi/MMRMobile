@@ -10,14 +10,13 @@
              x:Class="MMRMobile.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="*,Auto" Classes="MainContainer">
         <Grid Grid.Row="0">
-            <ContentControl Content="{Binding CurrentView}">
+            <ContentControl Content="{Binding CurrentView}"
+                          Classes="MainContent">
                 <ContentControl.DataTemplates>
                     <DataTemplate DataType="{x:Type vm:TagViewModel}">
                         <views:TagView />
@@ -34,7 +33,10 @@
                 </ContentControl.DataTemplates>
             </ContentControl>
         </Grid>
-        <Border Grid.Row="1" Classes="DockBox" IsVisible="{Binding ShowDock}">
+        
+        <Border Grid.Row="1" 
+                Classes="DockBox" 
+                IsVisible="{Binding ShowDock}">
             <dock:DockView />
         </Border>
     </Grid>
