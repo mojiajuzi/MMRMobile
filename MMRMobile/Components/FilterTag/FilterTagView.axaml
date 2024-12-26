@@ -7,13 +7,77 @@
              x:DataType="vm:FilterTagViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MMRMobile.Components.FilterTag.FilterTagView">
+
+    <UserControl.Styles>
+        <!-- 搜索框样式 -->
+        <Style Selector="AutoCompleteBox.tagSearch">
+            <Setter Property="Background" Value="#E5E9F0" /> <!-- nord5 -->
+            <Setter Property="Foreground" Value="#2E3440" /> <!-- nord0 -->
+            <Setter Property="BorderBrush" Value="#D8DEE9" /> <!-- nord4 -->
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Margin" Value="0 0 0 10" />
+            <Setter Property="Padding" Value="8 6" />
+        </Style>
+
+        <!-- 水印文本样式 -->
+        <Style Selector="AutoCompleteBox.tagSearch /template/ TextBox#PART_TextBox">
+            <Setter Property="Watermark" Value="搜索" />
+        </Style>
+
+        <Style Selector="AutoCompleteBox.tagSearch:focus">
+            <Setter Property="BorderBrush" Value="#5E81AC" /> <!-- nord10 -->
+            <Setter Property="Background" Value="#FFFFFF" />
+        </Style>
+
+        <!-- 标签列表样式 -->
+        <Style Selector="ListBox.tagList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <!-- 标签项样式 -->
+        <Style Selector="Border.SearchResult">
+            <Setter Property="Background" Value="#5E81AC" /> <!-- nord10 -->
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Padding" Value="8 4" />
+            <Setter Property="Margin" Value="0 0 8 8" />
+        </Style>
+
+        <!-- 标签文本样式 -->
+        <Style Selector="Border.SearchResult > StackPanel > TextBlock">
+            <Setter Property="Foreground" Value="#ECEFF4" /> <!-- nord6 -->
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <!-- 删除按钮样式 -->
+        <Style Selector="Button.SearchResult">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button.SearchResult > TextBlock">
+            <Setter Property="Foreground" Value="#D8DEE9" /> <!-- nord4 -->
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style Selector="Button.SearchResult:pointerover > TextBlock">
+            <Setter Property="Foreground" Value="#ECEFF4" /> <!-- nord6 -->
+        </Style>
+    </UserControl.Styles>
+
     <StackPanel>
         <AutoCompleteBox Name="TagSearchBox"
                          Classes="tagSearch"
                          FilterMode="None"
                          Text="{Binding SearchText}"
                          ItemsSource="{Binding FilteredTags}"
-                         Watermark="搜索"
                          SelectionChanged="TagSearchBox_OnSelectionChanged">
             <AutoCompleteBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:TagModel}">
@@ -21,6 +85,7 @@
                 </DataTemplate>
             </AutoCompleteBox.ItemTemplate>
         </AutoCompleteBox>
+
         <ListBox x:Name="VModel"
                  Classes="tagList"
                  ItemsSource="{Binding SelectedTags}">
@@ -38,8 +103,7 @@
                             <Button Classes="SearchResult"
                                     Command="{Binding #VModel.((vm:FilterTagViewModel)DataContext).RemoveTagCommand}"
                                     CommandParameter="{Binding}">
-                                <TextBlock Text="×"
-                                           VerticalAlignment="Center" />
+                                <TextBlock Text="×" />
                             </Button>
                         </StackPanel>
                     </Border>
