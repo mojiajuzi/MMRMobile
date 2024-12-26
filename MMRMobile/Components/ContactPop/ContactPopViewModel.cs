@@ -124,6 +124,12 @@ public partial class ContactPopViewModel : ViewModelBase, INavigationAware
         }
     }
 
+    [RelayCommand]
+    private void NavigateBack()
+    {
+        _navigationService.NavigateBack();
+    }
+
     private List<ContactTagModel> CreateContactTags(int contactId, List<TagModel> selectedTags)
     {
         return selectedTags.Select(t => new ContactTagModel
